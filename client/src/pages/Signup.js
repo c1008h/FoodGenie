@@ -18,7 +18,11 @@ export const Signup = (props) => {
 
     try {
       const { data } = await addUser({
-        variables: { username, email, password },
+        variables: { 
+          username: username.trim(), 
+          email: email.trim(), 
+          password: password.trim()
+        },
       });
 
       authService.login(data.addUser.token);
@@ -29,7 +33,7 @@ export const Signup = (props) => {
 
   return (
     <>  
-    {authService.loggedIn ? (
+    {authService.loggedIn() ? (
       <p>
         Success! You may now head{' '}
         <Link to='/'>Back to the homepage.</Link>

@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { authService } from '../utils/auth';
-// import {LoggedIn, Logout} from '../utils/auth';
-
-
 
 function Navbar(props) {
     // const { user, logout} = useContext(AuthContext)
@@ -18,7 +15,8 @@ function Navbar(props) {
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
             <Link to='/'>Food Genie</Link>
             <DropdownButton id="dropdown-basic-button" title="More" >
-            {authService.loggedIn ? (
+            {authService.loggedIn() && !authService.isTokenExpired() ? (
+
                 <>
                 <Dropdown.Item as={Link} to="/allfoods">All Foods</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/allresturaunts">All Resturaunts</Dropdown.Item>

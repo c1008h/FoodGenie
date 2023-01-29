@@ -1,94 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { authService } from '../utils/auth';
-
-import { Form, Button, Alert } from 'react-bootstrap';
+import {LoginForm} from '../components/Login/LoginForm'
+import { Alert } from 'react-bootstrap';
 import { LOGIN_USER } from '../utils/mutations';
 
-const LoginForm = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+export const Login = (props) => {
+  // const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
-  // update state based on form input changes
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
   // submit form
-  const handleFormSubmit = async (event) => {
-    if (!formState.email || !formState.password) {
+  const handleFormSubmit = async (email, password) => {
+    if (!email || !password) {
       alert('Failed to submit form! please fill all requested fileds.');
       document.location.replace('/');
     }
-    event.preventDefault();
-    console.log(formState);
+    // event.preventDefault();
     try {
       const { data } = await login({
-        variables: { ...formState },
+        variables: { 
+          email: email.trim(), 
+          password: password.trim() 
+        },
       });
       authService.login(data.login.token, data.login.user.permission);
-      document.location.replace('/matching');
+      document.location.replace('/');
       //localStorage.setItem('status',data.login.user.permission);
       //Auth.login(data.login.token);
     } catch (e) {
       console.log(e);
     }
-
-    // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
   };
   
   return (
-    <> {authService.loggedIn ? (
+    <> {authService.loggedIn() ? (
       <p>
         Success! You may now head{' '}
         <Link to="/">back to the homepage.</Link>
       </p>
     ) : (
-      <Form onSubmit={handleFormSubmit}>
-        {/* <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert> */}
-        <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email'
-            name='email'
-            onChange={handleChange}
-            value={formState.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleChange}
-            value={formState.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(formState.email && formState.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
+      <LoginForm onSubmit={handleFormSubmit} />
     )}
       
       
