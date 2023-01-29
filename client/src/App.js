@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Homepage from './pages/Homepage'
-import {Login} from './pages/Login'
+import { Login } from './pages/Login'
 import { Signup } from './pages/Signup';
 // import AllFood from './pages/AllFood'
 import AddFood from './pages/AddFood'

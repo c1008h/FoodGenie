@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { authService } from '../utils/auth';
@@ -7,30 +7,43 @@ import { Alert } from 'react-bootstrap';
 import { LOGIN_USER } from '../utils/mutations';
 
 export const Login = (props) => {
-  // const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
+  const handleSubmit = (e) => {
+      const { name, value } = e.target;
+
+      setFormState({
+          ...formState,
+          [name]: value,
+      });
+  };
+
   // submit form
-  const handleFormSubmit = async (email, password) => {
-    if (!email || !password) {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formState);
+
+    if (!formState.email || !formState.password) {
       alert('Failed to submit form! please fill all requested fileds.');
       document.location.replace('/');
     }
-    // event.preventDefault();
+
     try {
       const { data } = await login({
-        variables: { 
-          email: email.trim(), 
-          password: password.trim() 
-        },
+        variables: { ...formState },
       });
-      authService.login(data.login.token, data.login.user.permission);
-      document.location.replace('/');
-      //localStorage.setItem('status',data.login.user.permission);
-      //Auth.login(data.login.token);
+      authService.login(data.login.token)
+      // document.location.replace('/');
     } catch (e) {
       console.log(e);
     }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
   
   return (
@@ -40,7 +53,12 @@ export const Login = (props) => {
         <Link to="/">back to the homepage.</Link>
       </p>
     ) : (
-      <LoginForm onSubmit={handleFormSubmit} />
+      <LoginForm 
+        onSubmit={handleFormSubmit} 
+        handleSubmit={handleSubmit} 
+        handleFormSubmit={handleFormSubmit}
+        formState={formState}
+      />
     )}
       
       
