@@ -40,14 +40,14 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
-      saveFood: async (parent, { foodId, name, photos, category, url, distance }, context) => {
+      saveFood: async (parent, { foodId, name, image_url, is_closed, url, rating, price, display_phone, distance }, context) => {
         if (context.user) {
 
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { 
               saveFoods: {
-                foodId, name, photos, category, url, distance
+                foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
               }} },
             { new: true, runValidators: true }
           )

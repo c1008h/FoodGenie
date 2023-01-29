@@ -11,9 +11,27 @@ const typeDefs = gql`
   type Food {
     foodId: ID!
     name: String!
-    photos: String
-    category: String
+    image_url: String
+    is_closed: Boolean
     url: String
+    rating: String
+    #transaction: Array
+    price: String
+    #location: Object
+    display_phone: String
+    distance: String
+  }
+  type Resturaunts {
+    resturauntId: ID!
+    name: String!
+    image_url: String
+    is_closed: Boolean
+    url: String
+    rating: String
+    #transaction: Array
+    price: String
+    #location: Object
+    display_phone: String
     distance: String
   }
 
@@ -30,12 +48,11 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    # addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     # searchResturaunt(_id: , name: String): Resturaunts
     # saveResturaunt(resturauntID: ID!, name: String!): User
     # removeResturaunt(resturaunt: ID!): User
-    addUser(username: String!, email: String!, password: String!): Auth
-    saveFood(foodId: ID!, name: String!, photos: String, category: String, url: String, distance: String): User
+    saveFood(foodId: String, name: String!, image_url: String, url: String, rating: String, price: String, display_phone: String, distance: String): User
     removeFood(foodId: ID!): User
   }
 `;

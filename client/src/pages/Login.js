@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { authService } from '../utils/auth';
-import {LoginForm} from '../components/Login/LoginForm'
+import { LoginForm } from '../components/Login/LoginForm'
 import { Alert } from 'react-bootstrap';
 import { LOGIN_USER } from '../utils/mutations';
 
@@ -25,7 +25,7 @@ export const Login = (props) => {
     console.log(formState);
 
     if (!formState.email || !formState.password) {
-      alert('Failed to submit form! please fill all requested fileds.');
+      alert('Failed to submit form! Please fill all requested fields.');
       document.location.replace('/');
     }
 
@@ -33,8 +33,9 @@ export const Login = (props) => {
       const { data } = await login({
         variables: { ...formState },
       });
+
       authService.login(data.login.token)
-      // document.location.replace('/');
+
     } catch (e) {
       console.log(e);
     }

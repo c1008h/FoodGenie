@@ -1,15 +1,47 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { SAVE_RESTURAUNT } from '../utils/mutations';
 import { OneResturaunt } from './OneResturaunt'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import { authService } from '../../utils/auth';
 
 export const ListResturaunt = (props) => {
+
     // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
     const [reviews, setReviews] = useState({})
-    
+
+    const saveItem = (e) => {
+        const [saveResturaunt, { error, data }] = useMutation(SAVE_RESTURAUNT)
+
+        if(!authService.isTokenExpired()) {
+            alert('Login to save food!')
+        }
+
+        try {
+            const { data } = await saveResturaunt({
+                variables: {
+                    resturauntId: resturauntId, 
+                    name: name, 
+                    image_url: image_url, 
+                    is_closed: is_closed, 
+                    url: url, 
+                    rating: rating,
+                    price: price, 
+                    display_phone: display_phone, 
+                    distance: distance
+                }
+
+            })
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
     };
@@ -22,7 +54,7 @@ export const ListResturaunt = (props) => {
         
         // Getting more details by searching ID
         axios
-        .post("http://localhost:3001/api/resturaunt/:id", { 
+        .post("http://localhost:3005/api/resturaunt/:id", { 
             id: id
         })
         .then((response) => {
@@ -37,7 +69,7 @@ export const ListResturaunt = (props) => {
 
         // Get reviews
         axios
-        .post("http://localhost:3001/api/resturaunt/:id/reviews", { 
+        .post("http://localhost:3005/api/resturaunt/:id/reviews", { 
             id: id
         })
         .then((response) => {
@@ -69,7 +101,9 @@ export const ListResturaunt = (props) => {
                                 className="btn btn-secondary m-1"
                                 onClick={() => handleShow(item.id)}
                                 >More Info</Button>
-                            <Button type="button" className="btn btn-secondary m-1">Save</Button>
+                            <Button type="button" 
+                                className="btn btn-secondary m-1"
+                                >Save</Button>
                             <OneResturaunt 
                                 show={show}
                                 onHide={() => handleClose(item.id)}

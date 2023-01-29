@@ -2,7 +2,8 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // import schema from Food.js
-const foodSchema = require('./Food');
+const Food = require('./Food');
+const Resturaunts = require('./Resturaunts')
 
 const userSchema = new Schema(
   {
@@ -27,9 +28,15 @@ const userSchema = new Schema(
     savedFoods: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'foodSchema'
+        ref: 'Food'
       }
     ],
+    savedResturaunts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Resturaunts'
+      }
+    ]
   },
   // set this to use virtual below
   // {

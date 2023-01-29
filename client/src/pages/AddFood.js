@@ -17,7 +17,7 @@ export default function AddForm() {
         axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 
         axios
-        .post("http://localhost:3001/api/food", { 
+        .post("http://localhost:3005/api/food", { 
 
             userFood: userFood.trim(), 
             userLocation: userLocation.trim()

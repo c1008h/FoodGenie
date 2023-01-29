@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { OneFood } from './OneFood'
+import { useMutation } from '@apollo/client';
+import { SAVE_FOOD } from '../../utils/mutations';
+import { authService } from '../../utils/auth';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
@@ -9,7 +13,24 @@ export const ListFood = (props) => {
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
     const [reviews, setReviews] = useState({})
-    
+    const [saveFood ] = useMutation(SAVE_FOOD)
+
+    const saveItem = async (e) => {
+
+
+        try {
+            const { data } = await saveFood({
+                variables: {
+                    foodId: id
+                }
+            })
+            console.log('successfully saved!')
+
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
     };
@@ -22,7 +43,7 @@ export const ListFood = (props) => {
         
         // Getting more details by searching ID
         axios
-        .post("http://localhost:3001/api/food/:id", { 
+        .post("http://localhost:3005/api/food/:id", { 
             id: id
         })
         .then((response) => {
@@ -37,7 +58,7 @@ export const ListFood = (props) => {
 
         // Get reviews
         axios
-        .post("http://localhost:3001/api/food/:id/reviews", { 
+        .post("http://localhost:3005/api/food/:id/reviews", { 
             id: id
         })
         .then((response) => {
@@ -69,7 +90,11 @@ export const ListFood = (props) => {
                                 className="btn btn-secondary m-1"
                                 onClick={() => handleShow(item.id)}
                                 >More Info</Button>
-                            <Button type="button" className="btn btn-secondary m-1">Save</Button>
+                            <Button 
+                                type="button" 
+                                className="btn btn-secondary m-1"
+                                onClick={() => saveItem(item.id)}
+                            >Save</Button>
                             <OneFood 
                                 show={show}
                                 onHide={() => handleClose(item.id)}
