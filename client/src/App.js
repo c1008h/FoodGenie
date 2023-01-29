@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Homepage from './pages/Homepage'
 import LoginForm from './pages/Login'
-import SignupForm from './pages/Signup';
+import { Signup } from './pages/Signup';
 // import AllFood from './pages/AllFood'
 import AddFood from './pages/AddFood'
 
@@ -21,7 +21,7 @@ import Error from './pages/Error'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-    uri: '/graphql',
+    uri: 'http://localhost:3005/graphql',
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -60,7 +60,7 @@ export default function App() {
                     />
                     <Route 
                         path="/signup" 
-                        element={<SignupForm />} 
+                        element={<Signup />} 
                     />
                     {/* <Route 
                         path='/allfoods' 

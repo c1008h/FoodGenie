@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
+import { authService } from '../utils/auth';
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { LOGIN_USER } from '../utils/mutations';
@@ -31,7 +31,7 @@ const LoginForm = (props) => {
       const { data } = await login({
         variables: { ...formState },
       });
-      Auth.login(data.login.token, data.login.user.permission);
+      authService.login(data.login.token, data.login.user.permission);
       document.location.replace('/matching');
       //localStorage.setItem('status',data.login.user.permission);
       //Auth.login(data.login.token);
@@ -47,7 +47,7 @@ const LoginForm = (props) => {
   };
   
   return (
-    <> {data ? (
+    <> {authService.loggedIn ? (
       <p>
         Success! You may now head{' '}
         <Link to="/">back to the homepage.</Link>

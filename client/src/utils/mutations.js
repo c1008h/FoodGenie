@@ -18,6 +18,7 @@ export const ADD_USER = gql`
       user {
         _id
         username
+        email
       }
     }
   }
@@ -27,11 +28,6 @@ export const SAVE_FOOD = gql`
   mutation saveFood($foodId: String, $name: String, $photos: String, $category: String, $url: String, $distance: String) {
     saveFood(foodId: $foodId, name: $name, photos: $photos, category: $category,url: $url, distance: $distance) {
       foodId
-      name
-      photos
-      category
-      url
-      distance
     }
   }
 `;
@@ -44,11 +40,6 @@ export const REMOVE_FOOD = gql`
       email
       savedFoods {
         foodId
-        name
-        photos
-        category
-        url
-        distance
       }
     }
   }

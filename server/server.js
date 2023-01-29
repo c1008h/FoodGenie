@@ -2,15 +2,18 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors')
 const axios = require('axios');
+
+require('dotenv').config({path: __dirname+'/../.env'});
+
 const BANANA = process.env.BEARER_TOKEN
 
 // Importing ApolloServer
 const { ApolloServer } = require('apollo-server-express');
-// const path = require('path');
+
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 
-const { typeDefs, resolvers } = require('../schemas');
+const { typeDefs, resolvers } = require('./schemas');
 
 const PORT = process.env.PORT || 3005;
 const app = express();
