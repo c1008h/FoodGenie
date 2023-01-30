@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const RandomResturaunt = () => {
+export const RandomResturaunt = ({isFood}) => {
     // console.log('Showing random resturaunt')
     return (
         <div>

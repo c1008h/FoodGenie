@@ -8,15 +8,15 @@ import { RandomResturaunt } from '../components/Homepage/RandomResturaunt'
 export default function Homepage() {
     const [ isFood ] = useState(false)
     
-    var permission = false;
-    if (authService.loggedIn()) {
-        permission = authService.getProfile().data.permission;
-    }
+    // var permission = false;
+    // if (authService.loggedIn()) {
+    //     permission = authService.getProfile().data.permission;
+    // }
 
-    const logout = (event) => {
-        event.preventDefault();
-        authService.logout();
-    };
+    // const logout = (event) => {
+    //     event.preventDefault();
+    //     authService.logout();
+    // };
 
     return (
         <>
@@ -26,9 +26,9 @@ export default function Homepage() {
                     <button id='resturauntBtn' onClick={() => isFood(false)}>Resturaunt?</button>
                     <button id='foodBtn' onClick={() => isFood(true)}>Food?</button>
                     {isFood ?
-                        <RandomFood /> 
+                        <RandomFood isFood={isFood}/> 
                     :
-                        <RandomResturaunt />
+                        <RandomResturaunt isFood={isFood}/>
                     }
                 </>
             ):(
