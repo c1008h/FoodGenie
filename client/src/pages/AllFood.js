@@ -11,17 +11,8 @@ export default function AllFood() {
     const [userData, setUserData] = useState({})
     const [loading, setLoading] = useState(true)
     const [removeFood, { error }] = useMutation(REMOVE_FOOD);
-
     const { data } = useQuery(QUERY_ME)
-        // onCompleted: () => {
-        //     if (!data) {
-        //         return <div>No data available.</div>;
-        //     } 
-        //     setUserData(data.me) 
-        //     if(data){
-        //         setLoading(false)
-        //     }
-        // }
+
     useEffect(() => {
         if (data) {
             setUserData(data.me)
@@ -29,7 +20,8 @@ export default function AllFood() {
         }
     }, [data])
     
-    console.log(data)
+    // console.log(data)
+
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 
     const handleDeleteFood = async (foodId) => {

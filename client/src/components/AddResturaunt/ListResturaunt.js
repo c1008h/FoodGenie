@@ -1,40 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_RESTURAUNT } from '../../utils/mutations';
 import { OneResturaunt } from './OneResturaunt'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-// import { authService } from '../../utils/auth';
+import { QUERY_ME } from '../../utils/queries';
+import { saveResturauntIds, getSavedResturauntIds } from '../../utils/localStorage';
+import { authService } from '../../utils/auth';
 
 export const ListResturaunt = (props) => {
     // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
     const [reviews, setReviews] = useState({})
-    const [saveResturaunt] = useMutation(SAVE_RESTURAUNT)
+    const [savedResturauntIds, setSavedResturauntIds] = useState(getSavedResturauntIds());
 
-    const saveItem = async (e) => {
+    const [saveResturaunt, {error}] = useMutation(SAVE_RESTURAUNT, {
+        update(cache, { data: { saveResturaunt }}) {
+            // const { me } = cache.readQuery({ query: QUERY_ME });
+            const data = cache.readQuery({ query: QUERY_ME });
+            const me = data ? data.me : null;
+            if (!me) {
+                return;
+            }
+            
+            cache.writeQuery({
+                query: QUERY_ME,
+                data: { me: { ...me, savedResturaunts: [...me.savedResturaunts, saveResturaunt] } },
+            });
+        }
+    })
+
+    useEffect(() => {
+        return () => saveResturauntIds(savedResturauntIds)
+    })
+
+    const handleSaveResturaunt = async (id) => {
+        setId(id)
+        // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
+        const token = authService.loggedIn() ? authService.getToken() : null;
+        if(!token) {
+            return false
+        }
+        console.log(id)
         try {
-            await saveResturaunt({
-                variables: {
-                    resturauntId: id,
-                    name: props.data.businesses.name,
-                    image_url: props.data.businesses.image_url, 
-                    is_closed: props.data.businesses.is_closed, 
-                    url: props.data.businesses.url, 
-                    rating: props.data.businesses.rating, 
-                    price: props.data.businesses.price, 
-                    display_phone: props.data.businesses.display_phone, 
-                    distance: props.data.businesses.distance 
-                }
-            })
+            await saveResturaunt({ variables: { input: {
+                resturauntId: id.id,
+                name: id.name,
+                image_url: id.image_url,
+                is_closed: id.is_closed,
+                url: id.url,
+                rating: id.rating,
+                price: id.price,
+                display_phone: id.display_phone,
+                distance: id.distance
+            } } })
 
-        } catch (e) {
-            console.log(e)
+            if(error) { throw new Error('Something went wrong.')}
+
+            setSavedResturauntIds([...savedResturauntIds, id])
+        } catch (error) {
+            console.error(error)
         }
     }
-
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
     };
@@ -96,8 +125,10 @@ export const ListResturaunt = (props) => {
                                 >More Info</Button>
                             <Button type="button" 
                                 className="btn btn-secondary m-1"
-                                onClick={() => saveItem(item.id)}
-                                >Save</Button>
+                                onClick={() => handleSaveResturaunt(id)}>
+                                {savedResturauntIds?.some((savedResturauntId) => savedResturauntId === item.id) ?
+                                'This resturaunt has already been saved!' :
+                                'Save'}</Button>
                             <OneResturaunt 
                                 show={show}
                                 onHide={() => handleClose(item.id)}
