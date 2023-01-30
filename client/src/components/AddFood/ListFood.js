@@ -19,7 +19,13 @@ export const ListFood = (props) => {
 
     const [saveFood, {error}] = useMutation(SAVE_FOOD, {
         update(cache, { data: { saveFood }}) {
-            const { me } = cache.readQuery({ query: QUERY_ME });
+            // const { me } = cache.readQuery({ query: QUERY_ME });
+            const data = cache.readQuery({ query: QUERY_ME });
+            const me = data ? data.me : null;
+            if (!me) {
+                return;
+            }
+            
             cache.writeQuery({
                 query: QUERY_ME,
                 data: { me: { ...me, savedFoods: [...me.savedFoods, saveFood] } },

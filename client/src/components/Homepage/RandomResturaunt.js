@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export const RandomResturaunt = () => {
-    console.log('Showing random resturaunt')
+    // console.log('Showing random resturaunt')
     return (
         <div>
             <h4>Resturaunt</h4>

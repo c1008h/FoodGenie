@@ -78,12 +78,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    #saveFood(foodId: String!, name: String!, image_url: String, url: String, rating: Float, price: String, display_phone: String, distance: String): User
     saveFood(input: SaveFoodInput!): User
     removeFood(foodId: String!): User
     saveResturaunt(input: SaveResturauntInput!): User
-
-    #saveResturaunt(resturauntId: String!, name: String!, image_url: String, url: String, rating: Float, price: String, display_phone: String, distance: String): User
     removeResturaunt(resturauntId: String!): User
   }
 `;

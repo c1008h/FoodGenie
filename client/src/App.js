@@ -12,9 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from './pages/Homepage'
 import { Login } from './pages/Login'
 import { Signup } from './pages/Signup';
-// import AllFood from './pages/AllFood'
 import AddFood from './pages/AddFood'
 import AddResturaunt from './pages/AddResturaunt'
+import AllFood from './pages/AllFood'
+import AllResturaunt from './pages/AllResturaunt';
 import Navbar from './components/Nav';
 import Footer from './components/Footer';
 import Error from './pages/Error'
@@ -73,14 +74,14 @@ export default function App() {
                         path="/signup" 
                         element={<Signup />} 
                     />
-                    {/* <Route 
+                    <Route 
                         path='/allfoods' 
                         element={<AllFood/>}
-                    /> */}
-                    {/* <Route 
-                        path='/allfood' 
-                        element={<All/>}
-                    /> */}
+                    />
+                    <Route 
+                        path='/allresturaunts' 
+                        element={<AllResturaunt/>}
+                    />
                     <Route 
                         path='/addfood' 
                         element={<AddFood/>}
