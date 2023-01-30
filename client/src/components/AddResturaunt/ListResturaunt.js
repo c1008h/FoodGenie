@@ -1,40 +1,33 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SAVE_RESTURAUNT } from '../utils/mutations';
+import { SAVE_RESTURAUNT } from '../../utils/mutations';
 import { OneResturaunt } from './OneResturaunt'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-import { authService } from '../../utils/auth';
+// import { authService } from '../../utils/auth';
 
 export const ListResturaunt = (props) => {
-
     // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
     const [reviews, setReviews] = useState({})
+    const [saveResturaunt] = useMutation(SAVE_RESTURAUNT)
 
-    const saveItem = (e) => {
-        const [saveResturaunt, { error, data }] = useMutation(SAVE_RESTURAUNT)
-
-        if(!authService.isTokenExpired()) {
-            alert('Login to save food!')
-        }
-
+    const saveItem = async (e) => {
         try {
-            const { data } = await saveResturaunt({
+            await saveResturaunt({
                 variables: {
-                    resturauntId: resturauntId, 
-                    name: name, 
-                    image_url: image_url, 
-                    is_closed: is_closed, 
-                    url: url, 
-                    rating: rating,
-                    price: price, 
-                    display_phone: display_phone, 
-                    distance: distance
+                    resturauntId: id,
+                    name: props.data.businesses.name,
+                    image_url: props.data.businesses.image_url, 
+                    is_closed: props.data.businesses.is_closed, 
+                    url: props.data.businesses.url, 
+                    rating: props.data.businesses.rating, 
+                    price: props.data.businesses.price, 
+                    display_phone: props.data.businesses.display_phone, 
+                    distance: props.data.businesses.distance 
                 }
-
             })
 
         } catch (e) {
@@ -103,6 +96,7 @@ export const ListResturaunt = (props) => {
                                 >More Info</Button>
                             <Button type="button" 
                                 className="btn btn-secondary m-1"
+                                onClick={() => saveItem(item.id)}
                                 >Save</Button>
                             <OneResturaunt 
                                 show={show}

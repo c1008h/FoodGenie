@@ -40,18 +40,36 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
-      saveFood: async (parent, { foodId, name, image_url, is_closed, url, rating, price, display_phone, distance }, context) => {
+      saveFood: async (parent, { input }, context) => {
         if (context.user) {
-
-          const user = await User.findOneAndUpdate(
+          const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { 
-              saveFoods: {
-                foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
-              }} },
-            { new: true, runValidators: true }
-          )
-          return user;
+            { $addToSet: { savedFoods: input } },
+            { new: true }
+        )
+        console.log('successfully saved the food')
+
+        return updatedUser;
+          // const food = await Food.create({
+          //   foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
+          // })
+          // await User.findOneAndUpdate(
+          //   { _id: context.user._id },
+          //   { $addToSet: { savedFoods: food._id } },
+          //   { new: true, runValidators: true }
+
+
+          // )
+          // const user = await User.findOneAndUpdate(
+          //   { _id: context.user._id },
+          //   { $addToSet: { 
+          //     saveFoods: {
+          //       foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
+          //     }} },
+          //   { new: true, runValidators: true }
+          // )
+          // console.log('successfully saved the food')
+          // return user;
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
@@ -60,14 +78,36 @@ const resolvers = {
           
           const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
-            { $pull: { savedFoods: { foodId }} },
-            {new: true}
+            { $pull: { savedFoods: { foodId : foodId }} },
+            { new: true }
           )
           return updatedUser;
         }
         throw new AuthenticationError ('You need to be logged in.');
-
-      }
+      },
+      saveResturaunt: async (parent, { input }, context) => {
+        if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { savedResturaunts: input } },
+                { new: true }
+            )
+            return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be log in first.');
+      },
+      removeResturaunt: async (parent, { resturauntId } , context) => {
+        if (context.user) {
+          
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $pull: { savedResturaunts: { resturauntId : resturauntId }} },
+            { new: true }
+          )
+          return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be logged in.');
+      },
     }
 }
 module.exports = resolvers;

@@ -1,11 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const foodSchema = new Schema ({
     foodId: {
-        type: String
+        type: String, 
+        required: true
     },
     name: {
-        type: String
+        type: String,
+        required: true
     },
     image_url: {
         type: String
@@ -17,7 +19,7 @@ const foodSchema = new Schema ({
         type: String
     },
     rating: {
-        type: Number
+        type: Number 
     },
     // transaction: {
     //     type: Array
@@ -37,6 +39,4 @@ const foodSchema = new Schema ({
     }
 })
 
-const Food = model('Food', foodSchema);
-
-module.exports = Food;
+module.exports = foodSchema;

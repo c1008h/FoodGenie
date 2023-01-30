@@ -1,12 +1,14 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedSets` array in User.js
 const resturauntSchema = new Schema({
     resturauntId: {
-      type: String
+      type: String,
+      required: true
     },
     name: {
-        type: String
+        type: String,
+        required: true
     },
     image_url: {
         type: String
@@ -38,7 +40,4 @@ const resturauntSchema = new Schema({
     }
 });
 
-
-const Resturaunts = model('Resturaunts', resturauntSchema);
-
-module.exports = Resturaunts;
+module.exports = resturauntSchema;
