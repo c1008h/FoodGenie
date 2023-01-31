@@ -35,7 +35,8 @@ const foodSchema = new Schema ({
         type: String
     },
     distance: {
-        type: Number
+        // type: Schema.Types.Decimal128
+        type: String
     }
 })
 

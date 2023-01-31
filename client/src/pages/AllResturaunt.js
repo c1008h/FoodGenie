@@ -20,7 +20,7 @@ export default function AllResturaunt() {
         }
     }, [data])
     
-    // console.log(data)
+    console.log(userData)
 
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 
@@ -59,7 +59,7 @@ export default function AllResturaunt() {
         <Container>
             <h4>
                 {userDataLength?
-                    `Viewing ${userData.savedResturaunts ? data.me.savedResturaunts.length : 0} saved ${data.me.savedResturaunts && data.me.savedResturaunts.length === 1 ? 'food' : 'foods'}`
+                    `Viewing ${userData.savedResturaunts ? data.me.savedResturaunts.length : 0} saved ${data.me.savedResturaunts && data.me.savedResturaunts.length === 1 ? 'resturaunt' : 'resturaunts'}`
                     :
                     'You have no saved resturaunts!'
                 }

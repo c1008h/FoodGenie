@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel';
 import Moment from 'react-moment';
 
-export const OneFood = ({data, show, handleClose, handleSaveFood, id, review}) => {
+export const OneFood = ({data, show, handleClose, handleSaveFood, id, review, savedFoodIds}) => {
     // console.log(data)
     // console.log(id)
     // console.log(review.reviews);
@@ -58,7 +58,11 @@ export const OneFood = ({data, show, handleClose, handleSaveFood, id, review}) =
             </Modal.Body>
             <Modal.Footer>
             <Button onClick={() => handleClose(data.id)}>Close</Button>
-            <Button onClick={() => handleSaveFood(data.id)}>Save</Button>
+            <Button onClick={() => handleSaveFood(data.id, data.name, data.image_url, data.is_closed, data.url, data.rating, data.price, data.display_phone)}>
+                {savedFoodIds?.some((savedFoodId) => savedFoodId === data.id) ?
+                'This food has already been saved!':
+                'Save'}
+                </Button>
             </Modal.Footer>
         </Modal>
     )

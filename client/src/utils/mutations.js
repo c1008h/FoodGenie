@@ -45,7 +45,7 @@ export const SAVE_FOOD = gql`
   }
 `;
 export const REMOVE_FOOD = gql`
-  mutation removeFood($foodId: ID!) {
+  mutation removeFood($foodId: String!) {
     removeFood(foodId: $foodId) {
       _id
       username
@@ -107,7 +107,7 @@ export const SAVE_RESTURAUNT = gql`
 //   }
 // `;
 export const REMOVE_RESTURAUNT = gql`
-  mutation removeResturaunt($resturauntId: ID!) {
+  mutation removeResturaunt($resturauntId: String!) {
     removeResturaunt(resturauntId: $resturauntId) {
       _id
       username

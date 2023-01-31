@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose}) => {
     // console.log(data)
-    // console.log(id)
+    console.log(savedResturaunt)
     // console.log(review.reviews);
   
     return (

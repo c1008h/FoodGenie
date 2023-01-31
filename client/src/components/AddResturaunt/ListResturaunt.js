@@ -16,7 +16,7 @@ export const ListResturaunt = (props) => {
     const [reviews, setReviews] = useState({})
     const [savedResturauntIds, setSavedResturauntIds] = useState(getSavedResturauntIds());
 
-    const [saveResturaunt, {error}] = useMutation(SAVE_RESTURAUNT, {
+    const [saveResturaunt] = useMutation(SAVE_RESTURAUNT, {
         update(cache, { data: { saveResturaunt }}) {
             // const { me } = cache.readQuery({ query: QUERY_ME });
             const data = cache.readQuery({ query: QUERY_ME });
@@ -33,31 +33,31 @@ export const ListResturaunt = (props) => {
     })
 
     useEffect(() => {
-        return () => saveResturauntIds(savedResturauntIds)
+        return () => saveResturauntIds([...savedResturauntIds, id])
     })
 
-    const handleSaveResturaunt = async (id) => {
+    const handleSaveResturaunt = async (id, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
         setId(id)
         // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
         const token = authService.loggedIn() ? authService.getToken() : null;
         if(!token) {
             return false
         }
-        console.log(id)
+        // console.log(id)
         try {
             await saveResturaunt({ variables: { input: {
-                resturauntId: id.id,
-                name: id.name,
-                image_url: id.image_url,
-                is_closed: id.is_closed,
-                url: id.url,
-                rating: id.rating,
-                price: id.price,
-                display_phone: id.display_phone,
-                distance: id.distance
+                resturauntId: id,
+                name: name,
+                image_url: image_url,
+                is_closed: is_closed,
+                url: url,
+                rating: rating,
+                price: price,
+                display_phone: display_phone,
+                // distance: id.distance
             } } })
 
-            if(error) { throw new Error('Something went wrong.')}
+            if(saveResturaunt.error) { throw new Error('Something went wrong.')}
 
             setSavedResturauntIds([...savedResturauntIds, id])
         } catch (error) {
@@ -125,7 +125,7 @@ export const ListResturaunt = (props) => {
                                 >More Info</Button>
                             <Button type="button" 
                                 className="btn btn-secondary m-1"
-                                onClick={() => handleSaveResturaunt(id)}>
+                                onClick={() => handleSaveResturaunt(item.id, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone, item.distance)}>
                                 {savedResturauntIds?.some((savedResturauntId) => savedResturauntId === item.id) ?
                                 'This resturaunt has already been saved!' :
                                 'Save'}</Button>
@@ -137,6 +137,8 @@ export const ListResturaunt = (props) => {
                                 handleClose={handleClose}
                                 id={id}
                                 review={reviews}
+                                savedResturauntIds={savedResturauntIds}
+                                handleSaveResturaunt={handleSaveResturaunt}
                             />
                         </Card.Body>
                     </Card>

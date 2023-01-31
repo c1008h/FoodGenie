@@ -14,10 +14,11 @@ export const ListFood = (props) => {
     // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
+    // const [saving, setSave] = useState()
     const [reviews, setReviews] = useState({})
     const [savedFoodIds, setSavedFoodIds] = useState(getSavedFoodIds());
 
-    const [saveFood, {error}] = useMutation(SAVE_FOOD, {
+    const [saveFood] = useMutation(SAVE_FOOD, {
         update(cache, { data: { saveFood }}) {
             // const { me } = cache.readQuery({ query: QUERY_ME });
             const data = cache.readQuery({ query: QUERY_ME });
@@ -34,32 +35,33 @@ export const ListFood = (props) => {
     })
 
     useEffect(() => {
-        return () => saveFoodIds(savedFoodIds)
-    })
+        return () => saveFoodIds([...savedFoodIds, id])
+    },)
 
-    // console.log(id)
-    const handleSaveFood = async (id) => {
-        setId(id)
+    const handleSaveFood = async (id, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
+        console.log(id)
+        // setSave(id)
+        // console.log(saving)
         // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
         const token = authService.loggedIn() ? authService.getToken() : null;
         if(!token) {
             return false
         }
-        console.log(id)
+        // console.log(id)
         try {
             await saveFood({ variables: { input: {
-                foodId: id.id,
-                name: id.name,
-                image_url: id.image_url,
-                is_closed: id.is_closed,
-                url: id.url,
-                rating: id.rating,
-                price: id.price,
-                display_phone: id.display_phone,
-                distance: id.distance
-            } } })
+                foodId: id,
+                name: name,
+                image_url: image_url,
+                is_closed: is_closed,
+                url: url,
+                rating: rating,
+                price: price,
+                display_phone: display_phone,
+                // distance: distance
+            }}})
 
-            if(error) { throw new Error('Something went wrong.')}
+            if(saveFood.error) { throw new Error('Something went wrong.')}
 
             setSavedFoodIds([...savedFoodIds, id])
         } catch (error) {
@@ -104,7 +106,6 @@ export const ListFood = (props) => {
         .catch((error) => {
             console.error(error);
         });
-
     }
     return (
         <div>
@@ -126,7 +127,7 @@ export const ListFood = (props) => {
                             <Button 
                                 type="button" 
                                 className="btn btn-secondary m-1"
-                                onClick={() => handleSaveFood(id)}>
+                                onClick={() => handleSaveFood(item.id, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone, item.distance)}>
                                 {savedFoodIds?.some((savedFoodId) => savedFoodId === item.id) ?
                                 'This food has already been saved!' :
                                 'Save'}</Button>
@@ -138,6 +139,7 @@ export const ListFood = (props) => {
                                 handleClose={handleClose}
                                 id={id}
                                 review={reviews}
+                                savedFoodIds={savedFoodIds}
                                 handleSaveFood={handleSaveFood}
                             />
                         </Card.Body>
