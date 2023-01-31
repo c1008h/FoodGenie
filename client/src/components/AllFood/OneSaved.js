@@ -57,8 +57,8 @@ export const OneSaved = ({savedFood, show, handleDeleteFood, handleClose}) => {
                 </div> */}
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={() => handleClose(savedFood.id)}>Close</Button>
-            <Button onClick={() => handleDeleteFood(savedFood.id)}>Save</Button>
+            <Button onClick={() => handleClose(savedFood.foodId)}>Close</Button>
+            <Button onClick={() => handleDeleteFood(savedFood.foodId)}>Save</Button>
             </Modal.Footer>
         </Modal>
     )

@@ -112,7 +112,6 @@ export const REMOVE_RESTURAUNT = gql`
       _id
       username
       email
-      #bookCount
       savedResturaunts {
         resturauntId
         name

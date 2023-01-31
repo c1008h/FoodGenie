@@ -15,9 +15,9 @@ export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose})
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            key={savedResturaunt.id}
-            show={show[savedResturaunt.id]}
-            onHide={() => handleClose(savedResturaunt.id)}
+            key={savedResturaunt.resturauntId}
+            show={show[savedResturaunt.resturauntId]}
+            onHide={() => handleClose(savedResturaunt.resturauntId)}
         >
             <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -57,8 +57,8 @@ export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose})
                 </div> */}
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={() => handleClose(savedResturaunt.id)}>Close</Button>
-            <Button onClick={() => handleDeleteFood(savedResturaunt.id)}>Save</Button>
+            <Button onClick={() => handleClose(savedResturaunt.resturauntId)}>Close</Button>
+            <Button onClick={() => handleDeleteFood(savedResturaunt.resturauntId)}>Save</Button>
             </Modal.Footer>
         </Modal>
     )

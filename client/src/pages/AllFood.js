@@ -10,6 +10,7 @@ import FoodCards from '../components/AllFood/FoodCards'
 export default function AllFood() {
     const [userData, setUserData] = useState({})
     const [loading, setLoading] = useState(true)
+    const [removing, setRemove] = useState({})
     const [removeFood, { error }] = useMutation(REMOVE_FOOD);
     const { data } = useQuery(QUERY_ME)
 
@@ -19,12 +20,14 @@ export default function AllFood() {
             setLoading(false)
         }
     }, [data])
-    
     // console.log(data)
 
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 
     const handleDeleteFood = async (foodId) => {
+        setRemove(foodId)
+        console.log(foodId)
+
         const token = authService.loggedIn() ? authService.getToken() : null
         if (!token) {
             return false
@@ -32,9 +35,9 @@ export default function AllFood() {
 
         try {
             const updatedData = await removeFood({
-                variables: { foodId: foodId}
+                variables: { foodId: foodId }
             })
-            if(error) {
+            if(updatedData.error) {
                 throw new Error('Something went wrong.')
             }
             setUserData(updatedData.data.removeFood)

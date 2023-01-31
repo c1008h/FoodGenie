@@ -19,12 +19,12 @@ export default function ResturauntCards ({userData, handleDeleteResturaunt}) {
                     <Card.Title>{savedResturaunt.name}</Card.Title>
                     <Card.Img src={savedResturaunt.image_url} alt='' style={{height:'30%'}}/>
                     <Card.Body>
-                        <Button onClick={() => handleShow(savedResturaunt.id)}>More Info</Button>
-                        <Button onClick={() => handleDeleteResturaunt(savedResturaunt.id)}>Delete</Button>
+                        <Button onClick={() => handleShow(savedResturaunt.resturauntId)}>More Info</Button>
+                        <Button onClick={() => handleDeleteResturaunt(savedResturaunt.resturauntId)}>Delete</Button>
                         <OneSaved 
                             show={show}
-                            onHide={() => handleClose(savedResturaunt.id)}
-                            onClick={() => handleClose(savedResturaunt.id)}
+                            onHide={() => handleClose(savedResturaunt.resturauntId)}
+                            onClick={() => handleClose(savedResturaunt.resturauntId)}
                             handleClose={handleClose}
                             savedResturaunt={savedResturaunt}
                             handleDeleteResturaunt={handleDeleteResturaunt}

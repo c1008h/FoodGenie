@@ -4,6 +4,7 @@ import { OneSaved } from './OneSaved'
 
 export default function FoodCards ({userData, handleDeleteFood}) {
     console.log(userData.savedFoods)
+
     const [show, setShow] = useState({});
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
@@ -18,12 +19,12 @@ export default function FoodCards ({userData, handleDeleteFood}) {
                     <Card.Title>{savedFood.name}</Card.Title>
                     <Card.Img src={savedFood.image_url} alt='' style={{height:'30%'}}/>
                     <Card.Body>
-                        <Button onClick={() => handleShow(savedFood.id)}>More Info</Button>
-                        <Button onClick={() => handleDeleteFood(savedFood.id)}>Delete</Button>
+                        <Button onClick={() => handleShow(savedFood.foodId)}>More Info</Button>
+                        <Button onClick={() => handleDeleteFood(savedFood.foodId)}>Delete</Button>
                         <OneSaved 
                             show={show}
-                            onHide={() => handleClose(savedFood.id)}
-                            onClick={() => handleClose(savedFood.id)}
+                            onHide={() => handleClose(savedFood.foodId)}
+                            onClick={() => handleClose(savedFood.foodId)}
                             handleClose={handleClose}
                             savedFood={savedFood}
                             handleDeleteFood={handleDeleteFood}

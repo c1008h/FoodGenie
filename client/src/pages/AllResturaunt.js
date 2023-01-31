@@ -13,18 +13,19 @@ export default function AllResturaunt() {
     const [removeResturaunt, { error }] = useMutation(REMOVE_RESTURAUNT);
     const { data } = useQuery(QUERY_ME)
 
-    useEffect(() => {
+    useEffect(() => {                                                                     
         if (data) {
             setUserData(data.me)
             setLoading(false)
         }
     }, [data])
     
-    console.log(userData)
+    // console.log(userData)
 
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 
     const handleDeleteResturaunt = async (resturauntId) => {
+        console.log(resturauntId)
         const token = authService.loggedIn() ? authService.getToken() : null
         if (!token) {
             return false
@@ -38,7 +39,7 @@ export default function AllResturaunt() {
                 throw new Error('Something went wrong.')
             }
             setUserData(updatedData.data.removeResturaunt)
-            removeResturauntId(resturauntId)
+            removeResturauntId(userData)
         } catch (error) {
             console.error(error)
         }
