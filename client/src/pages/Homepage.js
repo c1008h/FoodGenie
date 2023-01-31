@@ -6,29 +6,32 @@ import { RandomResturaunt } from '../components/Homepage/RandomResturaunt'
 
 
 export default function Homepage() {
-    const [ isFood ] = useState(false)
-    
-    // var permission = false;
-    // if (authService.loggedIn()) {
-    //     permission = authService.getProfile().data.permission;
-    // }
+    const [ isFood, setIsFood ] = useState(false)
+    const [ isRestaurant, setIsRestaurant ] = useState(false)
 
-    // const logout = (event) => {
-    //     event.preventDefault();
-    //     authService.logout();
-    // };
+    
+    const handleFoodClick = () => {
+        setIsFood(!isFood);
+        setIsRestaurant(false);
+    };
+    
+    const handleRestaurantClick = () => {
+        setIsRestaurant(!isRestaurant);
+        setIsFood(false);
+    };
 
     return (
         <>
             {authService.loggedIn() ? (
                 <>
                     <h4>What choice would you like?</h4>
-                    <button id='resturauntBtn' onClick={() => isFood(false)}>Resturaunt?</button>
-                    <button id='foodBtn' onClick={() => isFood(true)}>Food?</button>
+                    <button id='resturauntBtn' onClick={handleRestaurantClick}>Resturaunt?</button>
+                    <button id='foodBtn' onClick={handleFoodClick}>Food?</button>
                     {isFood ?
-                        <RandomFood isFood={isFood}/> 
-                    :
-                        <RandomResturaunt isFood={isFood}/>
+                        <RandomFood /> 
+                    : isRestaurant ?
+                        <RandomResturaunt /> 
+                    : null
                     }
                 </>
             ):(
