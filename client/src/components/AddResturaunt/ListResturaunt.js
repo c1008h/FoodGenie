@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { SAVE_RESTURAUNT } from '../../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import { SAVE_RESTURAUNT, REMOVE_RESTURAUNT } from '../../utils/mutations';
 import { OneResturaunt } from './OneResturaunt'
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import axios from 'axios';
+import { Button, Card } from 'react-bootstrap';
+import { resturauntById, resturauntReview } from '../../utils/API';
 import { QUERY_ME } from '../../utils/queries';
-import { saveResturauntIds, getSavedResturauntIds } from '../../utils/localStorage';
 import { authService } from '../../utils/auth';
 
 export const ListResturaunt = (props) => {
-    // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
     const [reviews, setReviews] = useState({})
-    const [savedResturauntIds, setSavedResturauntIds] = useState(getSavedResturauntIds());
+    const [userData, setUserData] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [removeResturaunt] = useMutation(REMOVE_RESTURAUNT);
+    const { data } = useQuery(QUERY_ME)
+
+    useEffect(() => {
+        if (data) {
+            setUserData(data.me)
+            setLoading(false)
+        }
+    }, [data])
 
     const [saveResturaunt] = useMutation(SAVE_RESTURAUNT, {
         update(cache, { data: { saveResturaunt }}) {
@@ -32,10 +39,6 @@ export const ListResturaunt = (props) => {
         }
     })
 
-    useEffect(() => {
-        return () => saveResturauntIds([...savedResturauntIds, id])
-    })
-
     const handleSaveResturaunt = async (id, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
         setId(id)
         // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
@@ -43,7 +46,7 @@ export const ListResturaunt = (props) => {
         if(!token) {
             return false
         }
-        // console.log(id)
+
         try {
             await saveResturaunt({ variables: { input: {
                 resturauntId: id,
@@ -59,53 +62,58 @@ export const ListResturaunt = (props) => {
 
             if(saveResturaunt.error) { throw new Error('Something went wrong.')}
 
-            setSavedResturauntIds([...savedResturauntIds, id])
         } catch (error) {
             console.error(error)
         }
+        // setUserData({
+        //     ...userData,
+        //     savedResturaunts: [...userData.savedResturaunts, id],
+        // });
     }
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
     };
 
-    const handleShow = (id) => {
-
+    const handleShow = async (id) => {
         setShow((prevState) => ({ ...prevState, [id]: true }));
-
-        axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
         
-        // Getting more details by searching ID
-        axios
-        .post("http://localhost:3005/api/resturaunt/:id", { 
-            id: id
-        })
-        .then((response) => {
-            // console.log(response.data);
-            // setSearchMade(true);
-            setId(response.data)
+        // Searching resturaunt details from API
+        const response = await resturauntById(id)
+        const review = await resturauntReview(id)
 
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-
-        // Get reviews
-        axios
-        .post("http://localhost:3005/api/resturaunt/:id/reviews", { 
-            id: id
-        })
-        .then((response) => {
-            console.log(response.data);
-            // setSearchMade(true);
-            setReviews(response.data)
-
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-
+        setId(response)
+        setReviews(review)
     }
-  
+    const handleDeleteFood = async (resturauntId) => {
+        // console.log(foodId)
+        const token = authService.loggedIn() ? authService.getToken() : null
+        if (!token) {
+            return false
+        }
+
+        try {
+            const updatedData = await removeResturaunt({
+                variables: { resturauntId: resturauntId }
+            })
+            if(updatedData.error) {
+                throw new Error('Something went wrong.')
+            }
+            setUserData(updatedData.data.removeResturaunt)
+        } catch (error) {
+            console.error(error)
+        }
+        // setUserData({
+        //     ...userData,
+        //     savedResturaunts: userData.savedResturaunts.filter((resturauntId) => resturauntId !== id),
+        // });
+    }
+    const token = authService.loggedIn() ? authService.getToken() : null;
+    if(!token) {
+        return <h2>Please login first</h2>
+    }
+    if(loading) {
+        return <h2>LOADING...</h2>
+    }
     return (
         <div>
             <h4><strong>Results:</strong></h4>
@@ -123,12 +131,18 @@ export const ListResturaunt = (props) => {
                                 className="btn btn-secondary m-1"
                                 onClick={() => handleShow(item.id)}
                                 >More Info</Button>
+                            {/* {userData.savedResturaunts.some(resturauntId => resturauntId === item.id) */}
+                            {userData.savedResturaunts.includes(item.id)
+                                ?
+                                <Button type="button" 
+                                className="btn btn-secondary m-1"
+                                onClick={() => handleDeleteFood(item.id)}
+                                >Remove</Button> 
+                                : 
                             <Button type="button" 
                                 className="btn btn-secondary m-1"
                                 onClick={() => handleSaveResturaunt(item.id, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone, item.distance)}>
-                                {savedResturauntIds?.some((savedResturauntId) => savedResturauntId === item.id) ?
-                                'This resturaunt has already been saved!' :
-                                'Save'}</Button>
+                                Save</Button>}
                             <OneResturaunt 
                                 show={show}
                                 onHide={() => handleClose(item.id)}
@@ -137,14 +151,12 @@ export const ListResturaunt = (props) => {
                                 handleClose={handleClose}
                                 id={id}
                                 review={reviews}
-                                savedResturauntIds={savedResturauntIds}
                                 handleSaveResturaunt={handleSaveResturaunt}
+                                handleDeleteFood={handleDeleteFood}
                             />
                         </Card.Body>
                     </Card>
-
                 ))}
-            
             </div>
         </div>
     )

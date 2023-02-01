@@ -11,9 +11,9 @@ function Navbar(props) {
     }
 
     return (
-        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-            <Link to='/'>Food Genie</Link>
-            <DropdownButton id="dropdown-basic-button" title="More" >
+        <nav className='navbar navbar-expand-lg navbar-light' style={{backgroundColor:'#6666ff'}}>
+            <Link to='/' style={{color:'white', textDecoration:'none'}}>Food Genie</Link>
+            <DropdownButton id="dropdown-basic-button" style={{backgroundColor:'orange'}} title="More" >
             {authService.loggedIn() ? (
 
                 <>

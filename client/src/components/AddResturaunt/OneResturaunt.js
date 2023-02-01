@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel';
 import Moment from 'react-moment';
 
-export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveResturaunt, savedResturauntIds}) => {
+export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveResturaunt, savedResturauntIds, handleDeleteFood}) => {
     // console.log(data)
     // console.log(id)
     // console.log(review.reviews);
@@ -58,11 +58,17 @@ export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveRe
             </Modal.Body>
             <Modal.Footer>
             <Button onClick={() => handleClose(data.id)}>Close</Button>
-            <Button
-            onClick={() => handleSaveResturaunt(data.id, data.name, data.image_url, data.is_closed, data.url, data.rating, data.price, data.display_phone)}>
-                {savedResturauntIds?.some((savedResturauntId) => savedResturauntId === data.id) ?
-                'This resturaunt has already been saved!':
-                'Save'}</Button>
+            {savedResturauntIds?.some((savedResturauntId) => savedResturauntId === data.id) ?
+                <Button type="button" 
+                className="btn btn-secondary m-1"
+                onClick={() => handleDeleteFood(savedResturauntIds)}
+                >Remove</Button> 
+            : 
+                <Button type="button" 
+                className="btn btn-secondary m-1"
+                onClick={() => handleSaveResturaunt(data.id, data.name, data.image_url, data.is_closed, data.url, data.rating, data.price, data.display_phone, data.distance)}>
+                Save</Button>
+            }
             </Modal.Footer>
         </Modal>
     )

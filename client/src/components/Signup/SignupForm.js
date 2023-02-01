@@ -5,17 +5,27 @@ export const SignupForm = ({onSubmit}) => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmpassword, setConfirmPassword] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(password)
+        console.log(confirmpassword)
+        if(confirmpassword === password) {
+
         onSubmit(username, email, password);
         setUsername('')
         setEmail('')
         setPassword('')
+      } else {
+        alert('Confirm password is not the same as password!')
+        setPassword('')
+        setConfirmPassword('')
+      }
     };
 
     return(
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} style={{padding:'15%', justifyContent:'center'}}>
         <Form.Group>
           <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
@@ -54,8 +64,20 @@ export const SignupForm = ({onSubmit}) => {
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
-        <Button
-          disabled={!(username && email && password)}
+        <Form.Group>
+          <Form.Label htmlFor='password2'>Confirm Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Confirm password'
+            name='confirmpassword'
+            onChange={e => setConfirmPassword(e.target.value)}
+            value={confirmpassword}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Confirm your password!</Form.Control.Feedback>
+        </Form.Group>
+        <Button style={{margin:'5%', justifyContent:'center', textAlign:'center'}}
+          disabled={!(username && email && password && confirmpassword)}
           type='submit'
           variant='success'>
           Submit

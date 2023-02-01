@@ -11,6 +11,7 @@ const typeDefs = gql`
 
   type Food {
     foodId: String!
+    foodtype: String
     name: String!
     image_url: String
     is_closed: Boolean
@@ -38,6 +39,7 @@ const typeDefs = gql`
 
   input SaveFoodInput {
     foodId: String!
+    foodtype: String
     name: String!
     image_url: String
     is_closed: Boolean

@@ -50,26 +50,6 @@ const resolvers = {
         console.log('successfully saved the food')
 
         return updatedUser;
-          // const food = await Food.create({
-          //   foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
-          // })
-          // await User.findOneAndUpdate(
-          //   { _id: context.user._id },
-          //   { $addToSet: { savedFoods: food._id } },
-          //   { new: true, runValidators: true }
-
-
-          // )
-          // const user = await User.findOneAndUpdate(
-          //   { _id: context.user._id },
-          //   { $addToSet: { 
-          //     saveFoods: {
-          //       foodId, name, image_url, is_closed, url, rating, price, display_phone, distance
-          //     }} },
-          //   { new: true, runValidators: true }
-          // )
-          // console.log('successfully saved the food')
-          // return user;
         }
         throw new AuthenticationError ('You need to be logged in.');
       },
@@ -81,6 +61,7 @@ const resolvers = {
             { $pull: { savedFoods: { foodId : foodId }} },
             { new: true }
           )
+          console.log('successfully removed the food')
           return updatedUser;
         }
         throw new AuthenticationError ('You need to be logged in.');
@@ -92,6 +73,7 @@ const resolvers = {
                 { $addToSet: { savedResturaunts: input } },
                 { new: true }
             )
+            console.log('successfully saved the resturaunt')
             return updatedUser;
         }
         throw new AuthenticationError ('You need to be log in first.');
@@ -104,6 +86,7 @@ const resolvers = {
             { $pull: { savedResturaunts: { resturauntId : resturauntId }} },
             { new: true }
           )
+          console.log('successfully removed the resturaunt')
           return updatedUser;
         }
         throw new AuthenticationError ('You need to be logged in.');

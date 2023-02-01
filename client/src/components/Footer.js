@@ -3,7 +3,7 @@ import React from 'react';
 function Footer () {
     return (
         <footer style={{
-            backgroundColor:'#7395AE', 
+            backgroundColor:'#6666ff', 
             backgroundSize: 'cover', 
             padding:'5% 0', 
             position:'absolute',
@@ -11,7 +11,7 @@ function Footer () {
             width:'100%'
 
         }}>
-            <p style={{textAlign: 'center'}}>Copyright © 2022 Chris Hong</p>
+            <p style={{textAlign: 'center', color:'white'}}>Copyright © 2022 Chris Hong</p>
         </footer>
     )
 }

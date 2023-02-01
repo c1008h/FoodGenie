@@ -1,26 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import { OneFood } from './OneFood'
-import { useMutation } from '@apollo/client';
-import { SAVE_FOOD } from '../../utils/mutations';
+import { SAVE_FOOD, REMOVE_FOOD } from '../../utils/mutations';
 import { authService } from '../../utils/auth';
-
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import axios from 'axios';
+import { Button, Card } from 'react-bootstrap';
 import { QUERY_ME } from '../../utils/queries';
-import { saveFoodIds, getSavedFoodIds } from '../../utils/localStorage';
+import { foodById, foodReview } from '../../utils/API';
 
 export const ListFood = (props) => {
-    // console.log(props.data.businesses)
     const [show, setShow] = useState({});
     const [id, setId ] = useState({});
-    // const [saving, setSave] = useState()
     const [reviews, setReviews] = useState({})
-    const [savedFoodIds, setSavedFoodIds] = useState(getSavedFoodIds());
+    const [userData, setUserData] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [removeFood] = useMutation(REMOVE_FOOD);
 
+    const { data } = useQuery(QUERY_ME)
+
+    useEffect(() => {
+        if (data) {
+            setUserData(data.me.savedFoods)
+            setLoading(false)
+        }
+    }, [data])
+    // console.log(props.food)
+
+    const renderButton = (userData, index) => {
+        const item = userData.find(item => item.id === index)
+        if(item) {
+            return <Button type="button" 
+            className="btn btn-secondary m-1"
+            onClick={() => handleDeleteFood(item.id)}>Remove</Button>
+        } else {
+            return <Button type="button" 
+            className="btn btn-secondary m-1"
+            onClick={() => 
+            handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>Save</Button>
+        }
+    }
     const [saveFood] = useMutation(SAVE_FOOD, {
         update(cache, { data: { saveFood }}) {
-            // const { me } = cache.readQuery({ query: QUERY_ME });
             const data = cache.readQuery({ query: QUERY_ME });
             const me = data ? data.me : null;
             if (!me) {
@@ -33,16 +52,8 @@ export const ListFood = (props) => {
             });
         }
     })
-
-    useEffect(() => {
-        return () => saveFoodIds([...savedFoodIds, id])
-    },)
-
-    const handleSaveFood = async (id, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
-        console.log(id)
-        // setSave(id)
-        // console.log(saving)
-        // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
+    const handleSaveFood = async (id, foodtype, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
+        // console.log(props.food.trim())
         const token = authService.loggedIn() ? authService.getToken() : null;
         if(!token) {
             return false
@@ -51,6 +62,7 @@ export const ListFood = (props) => {
         try {
             await saveFood({ variables: { input: {
                 foodId: id,
+                foodtype: props.food.trim().charAt(0).toUpperCase() + props.food.trim().slice(1).toLowerCase(),
                 name: name,
                 image_url: image_url,
                 is_closed: is_closed,
@@ -62,8 +74,6 @@ export const ListFood = (props) => {
             }}})
 
             if(saveFood.error) { throw new Error('Something went wrong.')}
-
-            setSavedFoodIds([...savedFoodIds, id])
         } catch (error) {
             console.error(error)
         }
@@ -71,45 +81,45 @@ export const ListFood = (props) => {
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
     };
-    const handleShow = (id) => {
-
+    const handleShow = async (id) => {
         setShow((prevState) => ({ ...prevState, [id]: true }));
+        // Searching foodId and reviews from API
+        const response = await foodById(id)
+        const review = await foodReview(id)
+        // console.log(response)
+        // console.log(review)
+        setId(response)
+        setReviews(review)
 
-        axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
-        
-        // Getting more details by searching ID
-        axios
-        .post("http://localhost:3005/api/food/:id", { 
-            id: id
-        })
-        .then((response) => {
-            // console.log(response.data);
-            // setSearchMade(true);
-            setId(response.data)
+    }
+    const handleDeleteFood = async (foodId) => {
+        const token = authService.loggedIn() ? authService.getToken() : null
+        if (!token) {
+            return false
+        }
 
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-
-        // Get reviews
-        axios
-        .post("http://localhost:3005/api/food/:id/reviews", { 
-            id: id
-        })
-        .then((response) => {
-            console.log(response.data);
-            // setSearchMade(true);
-            setReviews(response.data)
-
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+        try {
+            const updatedData = await removeFood({
+                variables: { foodId: foodId }
+            })
+            if(updatedData.error) {
+                throw new Error('Something went wrong.')
+            }
+            setUserData(updatedData.data.removeFood)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const token = authService.loggedIn() ? authService.getToken() : null;
+    if(!token) {
+        return <h2>Please login first</h2>
+    }
+    if(loading) {
+        return <h2>LOADING...</h2>
     }
     return (
         <div>
-            <h4><strong>Results:</strong></h4>
+            <h4><strong>Results for {props.food}:</strong></h4>
             <div className='col-12 row' style={{justifyContent:'center'}}> 
                 {props.data.businesses.map((item, index) => (
                     <Card key={index}  className='card col-xl-3 col-md-5 col-sm-8 col-xs-12' style={{margin:'2%'}}>
@@ -121,16 +131,22 @@ export const ListFood = (props) => {
                             <p>{item.location.address1}</p>
                             <p>{item.location.city}, {item.location.state}, {item.location.zip_code}, {item.location.country}</p>
                             <Button type="button" 
-                                className="btn btn-secondary m-1"
-                                onClick={() => handleShow(item.id)}
-                                >More Info</Button>
-                            <Button 
+                            className="btn btn-secondary m-1"
+                            onClick={() => handleShow(item.id)}
+                            >More Info</Button>
+                            {userData && userData.savedFoods && !userData.savedFoods.includes(item.id) ? (
+                                <Button type="button" 
+                                    className="btn btn-secondary m-1"
+                                    onClick={() => handleDeleteFood(item.id)}
+                                >Remove</Button> 
+                            ): (
+                                <Button
                                 type="button" 
                                 className="btn btn-secondary m-1"
-                                onClick={() => handleSaveFood(item.id, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone, item.distance)}>
-                                {savedFoodIds?.some((savedFoodId) => savedFoodId === item.id) ?
-                                'This food has already been saved!' :
-                                'Save'}</Button>
+                                onClick={() => 
+                                handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>
+                            Save</Button>)}
+                            {/* {renderButton(userData, item.id)} */}
                             <OneFood 
                                 show={show}
                                 onHide={() => handleClose(item.id)}
@@ -139,8 +155,8 @@ export const ListFood = (props) => {
                                 handleClose={handleClose}
                                 id={id}
                                 review={reviews}
-                                savedFoodIds={savedFoodIds}
                                 handleSaveFood={handleSaveFood}
+                                handleDeleteFood={handleDeleteFood}
                             />
                         </Card.Body>
                     </Card>

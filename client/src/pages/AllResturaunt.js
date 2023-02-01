@@ -20,7 +20,7 @@ export default function AllResturaunt() {
         }
     }, [data])
     
-    // console.log(userData)
+    console.log(userData)
 
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 

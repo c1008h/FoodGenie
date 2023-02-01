@@ -1,12 +1,12 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
-// import Carousel from 'react-bootstrap/Carousel';
-// import Moment from 'react-moment';
+import Carousel from 'react-bootstrap/Carousel';
+import Moment from 'react-moment';
 
 export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose}) => {
     // console.log(data)
-    console.log(savedResturaunt)
+    // console.log(savedResturaunt)
     // console.log(review.reviews);
   
     return (
@@ -25,14 +25,14 @@ export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose})
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {/* <Carousel fade key={id.photos}>
-                    {id?.photos?.map((photos) =>
+                <Carousel fade key={savedResturaunt.photos}>
+                    {savedResturaunt?.photos?.map((photos) =>
                         <Carousel.Item >
                         <img src={photos} alt='' />
                         </Carousel.Item>
                     )}
 
-                </Carousel> */}
+                </Carousel> 
 
                 {/* <div key={review.reviews}>
                     {review?.reviews?.map((reviews) =>
@@ -54,7 +54,7 @@ export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose})
                         </div>
                     )}
 
-                </div> */}
+                </div>  */}
             </Modal.Body>
             <Modal.Footer>
             <Button onClick={() => handleClose(savedResturaunt.resturauntId)}>Close</Button>

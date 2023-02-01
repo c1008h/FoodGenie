@@ -32,6 +32,7 @@ export const SAVE_FOOD = gql`
       username
       savedFoods {
         foodId
+        foodtype
         name
         image_url
         is_closed
@@ -52,6 +53,7 @@ export const REMOVE_FOOD = gql`
       email
       savedFoods {
         foodId
+        foodtype
         name
         image_url
         is_closed
@@ -64,18 +66,7 @@ export const REMOVE_FOOD = gql`
     }
   }
 `;
-// export const REMOVE_FOOD = gql`
-//   mutation removeFood($foodId: String!) {
-//     removeFood(foodId: $foodId) {
-//       _id
-//       username
-//       email
-//       savedFoods {
-//         foodId
-//       }
-//     }
-//   }
-// `;
+
 export const SAVE_RESTURAUNT = gql`
   mutation saveResturaunt($input: SaveResturauntInput!) {
     saveResturaunt(input: $input) {
@@ -94,18 +85,7 @@ export const SAVE_RESTURAUNT = gql`
     }
   }
 `;
-// export const REMOVE_RESTURAUNT = gql`
-//   mutation removeResturaunt($resturauntId: String!) {
-//     removeResturaunt(resturauntId: $resturauntId) {
-//       _id
-//       username
-//       email
-//       savedResturaunt {
-//         resturauntId
-//       }
-//     }
-//   }
-// `;
+
 export const REMOVE_RESTURAUNT = gql`
   mutation removeResturaunt($resturauntId: String!) {
     removeResturaunt(resturauntId: $resturauntId) {

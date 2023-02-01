@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 export const LoginForm = ({handleFormSubmit, handleSubmit, formState}) => {
 
     return (
-        <Form onSubmit={handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
         {/* <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
         Something went wrong with your login credentials!
         </Alert> */}
@@ -33,7 +33,7 @@ export const LoginForm = ({handleFormSubmit, handleSubmit, formState}) => {
                 />
                 <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
             </Form.Group>
-            <Button
+            <Button style={{margin:'5%', justifyContent:'center', textAlign:'center'}}
             disabled={!(formState.email && formState.password)}
             type='submit'
             variant='success'>

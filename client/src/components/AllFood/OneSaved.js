@@ -15,9 +15,9 @@ export const OneSaved = ({savedFood, show, handleDeleteFood, handleClose}) => {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            key={savedFood.id}
-            show={show[savedFood.id]}
-            onHide={() => handleClose(savedFood.id)}
+            key={savedFood.foodId}
+            show={show[savedFood.foodId]}
+            onHide={() => handleClose(savedFood.foodId)}
         >
             <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">

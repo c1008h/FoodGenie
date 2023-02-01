@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
       email
       savedFoods {
         foodId
+        foodtype
         name
         image_url
         is_closed

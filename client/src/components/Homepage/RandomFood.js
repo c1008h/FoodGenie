@@ -1,26 +1,27 @@
 import React, {useState, useEffect} from 'react'
-import { useQuery } from '@apollo/client'
-import { QUERY_ME } from '../../utils/queries'
+import { Container } from 'react-bootstrap'
 
-export const RandomFood = ({isFood}) => {
-    // console.log('Showing Randomized food')
-    const [userData, setUserData] = useState({})
+export const RandomFood = ({userSavedFoods}) => {
+    const [noData, setNoData] = useState(false)
     const [answer, setAnswer] = useState({})
 
-    const { data } = useQuery(QUERY_ME)
     useEffect(() => {
-        if (data && data.me.savedFoods) {
-            setUserData(data.me)
-            setAnswer(data.me.savedFoods[Math.floor(Math.random() * data.me.savedFoods.length)])
+        if(userSavedFoods.length !== 0) {
+            setNoData(false)
+            setAnswer(userSavedFoods[Math.floor(Math.random() * userSavedFoods.length)])
+        } else {
+            setNoData(true)
         }
-    }, [data, userData.savedFoods])
-
-    console.log(answer)
+    }, [userSavedFoods])
 
     return(
-        <div>
-            <h2>{answer.name}</h2>
-        </div>
+        <Container>
+            {!noData? (
+                <h3>{answer.foodtype}</h3>
+            ) : (
+                <h3>No saved foods available!</h3>
+            )}
+        </Container>
     )
 }
 
