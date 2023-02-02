@@ -20,7 +20,7 @@ export default function AllFood() {
         }
     }, [data])
 
-    console.log(userData.savedFoods)
+    // console.log(userData.savedFoods)
 
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
     const uniqueFoodTypes = userData.savedFoods && Array.isArray(
@@ -29,7 +29,7 @@ export default function AllFood() {
             : new Set([]);
     const foodTypesCount = uniqueFoodTypes.size;
 
-    const handleDeleteFoodItem = async (foodtype) => {
+    const handleDeleteFoodItem = async (foodtype, userData, savedFoods) => {
         // console.log(foodId)
         const token = authService.loggedIn() ? authService.getToken() : null
         if (!token) {
@@ -43,9 +43,11 @@ export default function AllFood() {
             if(updatedData.error) {
                 throw new Error('Something went wrong.')
             }
-            setUserData(updatedData.data.removeFood)
+            setUserData(updatedData.data.removeFoodItem)
         } catch (error) {
             console.error(error)
+            // setErrorMessage(error.message)
+
         }
     }
     const token = authService.loggedIn() ? authService.getToken() : null;
@@ -63,6 +65,7 @@ export default function AllFood() {
                     'You have no saved foods!'
                 }
             </h4>
+            {/* {errorMessage && <div>{errorMessage}</div>} */}
             <FoodCards 
                 userData={userData}
                 handleDeleteFoodItem={handleDeleteFoodItem}

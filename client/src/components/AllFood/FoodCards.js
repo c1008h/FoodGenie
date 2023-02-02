@@ -8,7 +8,7 @@ export default function FoodCards ({userData, handleDeleteFoodItem}) {
     if(!token) {
         return <h2>Please login first</h2>
     }
-    
+    console.log(userData.savedFoods)
     const foodtypes = new Set(userData.savedFoods.map(savedFood => savedFood.foodtype));
     const uniqueFoodtypes = Array.from(foodtypes);
 
@@ -26,7 +26,7 @@ export default function FoodCards ({userData, handleDeleteFoodItem}) {
                             pathname:'/onefood',
                             search: `?foodtype=${foodtype}`
                         }}>Served At</Button>
-                        <Button className='btns' onClick={() => handleDeleteFoodItem(foodtype)}>Remove</Button>
+                        <Button className='btns' onClick={() => handleDeleteFoodItem(foodId)}>Remove</Button>
                     </Card.Body>
                 </Card>
                 )

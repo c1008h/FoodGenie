@@ -17,3 +17,22 @@
 .btns {
     margin:2%
 }
+
+/* OneFood.JS */
+#topPage {
+    justify-content: center;
+    text-align: center;
+}
+
+#cardContainer {
+    margin-top:2%;
+}
+#card {
+    margin: 5%;
+}
+#cardbody {
+    justify-content: center;
+}
+#cardBtn {
+    margin: 2%;
+}

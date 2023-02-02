@@ -6,7 +6,7 @@ import { authService } from '../utils/auth';
 import { useQuery, useMutation } from '@apollo/client'
 import { REMOVE_FOOD } from '../utils/mutations'
 import { QUERY_ME } from '../utils/queries'
-
+import '../styles/all.css'
 export default function OneFood() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -53,19 +53,22 @@ export default function OneFood() {
 
     return (
         <Container>
-            <h4>Resturaunts that you saved that serve {foodtype}</h4>
+            <div id='topPage' className='row'>
+                <h4>Resturaunts that you saved that serve {foodtype}</h4>
+                <Button className='col-4' as={Link} to={{pathname:'/allfoods'}}>Back</Button>
+            </div>
             {loading ? (
                 <h2>Loading...</h2>
                 )  : (
-                <div>
+                <div id='cardContainer' className='row'>
                     {filterfood.map((food, index) => (
-                    <Card key={index}>
-                        <Card.Body>
+                    <Card id='card' key={index} className='col-4'>
+                        <Card.Body id='cardbody' className='col-12'>
                             <Card.Title>{food.name}</Card.Title>
                             <Card.Img src={food.img_url} />
                             <p>{food.is_closed ? 'Closed' : 'Open'}</p>
-                            <Button as={Link} to={{pathname:'/allfoods'}}>Back</Button>
-                            <Button onClick={() => handleDeleteFood(food)}>Remove</Button>
+                            <Button id='cardBtn'>Info</Button>
+                            <Button id='cardBtn' onClick={() => handleDeleteFood(food.foodId)}>Remove</Button>
                         </Card.Body>
                     </Card>
                     ))}
