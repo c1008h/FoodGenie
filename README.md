@@ -1,4 +1,4 @@
-#Food Genie
+# Food Genie
 
 ## Description
 The solution to the daily food dilemma. Search and save your favorite resturaunts and foods. Save time and let the app decide your next meal!
@@ -10,21 +10,22 @@ The solution to the daily food dilemma. Search and save your favorite resturaunt
 - <a href='https://www.mongodb.com/'>MongoDB</a>
 - <a href='https://expressjs.com/'>Express</a>
 - <a href='https://graphql.org/learn/'>Graphql</a>
-- <a href='https://www.yelp.com/developers>REST API</a>
+- <a href='https://www.yelp.com/developers'>REST API</a>
 
 
 
 ## Table of Contents (Optional)
-- [Description](#description)
-  - [Created with:](#created-with)
-- [Table of Contents (Optional)](#table-of-contents-optional)
-- [Instructions](#instructions)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [Contribution](#contribution)
-- [License](#license)
-- [Badges](#badges)
-- [Contact](#contact)
+- [Food Genie](#food-genie)
+  - [Description](#description)
+    - [Created with:](#created-with)
+  - [Table of Contents (Optional)](#table-of-contents-optional)
+  - [Instructions](#instructions)
+    - [Installation](#installation)
+    - [Usage](#usage)
+  - [Contribution](#contribution)
+  - [License](#license)
+  - [Badges](#badges)
+  - [Contact](#contact)
 
 ## Instructions
 
