@@ -19,6 +19,7 @@ export const ListFood = (props) => {
 
     useEffect(() => {
         if (data) {
+            console.log(data.me)
             setUserData(data.me.savedFoods)
             setLoading(false)
         }
