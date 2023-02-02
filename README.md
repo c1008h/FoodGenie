@@ -1,4 +1,5 @@
 # Food Genie
+<img src='./images/FoodGenie.gif'>
 
 ## Description
 The solution to the daily food dilemma. Search and save your favorite resturaunts and foods. Save time and let the app decide your next meal!
