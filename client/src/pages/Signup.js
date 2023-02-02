@@ -7,7 +7,7 @@ import { Alert } from 'react-bootstrap'
 import {SignupForm} from '../components/Signup/SignupForm'
 
 export const Signup = (props) => {
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (username, email, password) => {
     if(!username || !email || !password){
