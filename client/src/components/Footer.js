@@ -1,17 +1,10 @@
 import React from 'react';
+import '../styles/index.css'
 
 function Footer () {
     return (
-        <footer style={{
-            backgroundColor:'#6666ff', 
-            backgroundSize: 'cover', 
-            padding:'5% 0', 
-            position:'absolute',
-            bottom:'0',
-            width:'100%'
-
-        }}>
-            <p style={{textAlign: 'center', color:'white'}}>Copyright © 2022 Chris Hong</p>
+        <footer className='footer'>
+            <p id='footer-text'>Copyright © 2022 Chris Hong</p>
         </footer>
     )
 }

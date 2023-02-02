@@ -1,0 +1,32 @@
+:root {
+    --purple:#6666ff;
+}
+
+/* Navbar styles */
+#title {
+    color:white;
+    text-decoration: none;
+    font-size: 30px;
+    margin-left: 5%;
+}
+
+.navbar {
+    height: 20%;
+    background-color: var(--purple);
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    background-color: var(--purple);
+    background-size: cover;
+    padding: 5% 0;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
+
+#footer-text {
+    text-align: center;
+    color:white;
+}

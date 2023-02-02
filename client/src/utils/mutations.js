@@ -67,6 +67,28 @@ export const REMOVE_FOOD = gql`
   }
 `;
 
+export const REMOVE_FOOD_ITEM = gql`
+  mutation removeFoodItem($foodtype: String) {
+    removeFoodItem(foodtype: $foodtype) {
+      _id
+      username
+      email
+      savedFoods {
+        foodId
+        foodtype
+        name
+        image_url
+        is_closed
+        url
+        rating
+        price
+        display_phone
+        distance
+      }
+    }
+  }
+`;
+
 export const SAVE_RESTURAUNT = gql`
   mutation saveResturaunt($input: SaveResturauntInput!) {
     saveResturaunt(input: $input) {

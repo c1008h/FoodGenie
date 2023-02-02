@@ -82,6 +82,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     saveFood(input: SaveFoodInput!): User
     removeFood(foodId: String!): User
+    removeFoodItem(foodtype:String):User
     saveResturaunt(input: SaveResturauntInput!): User
     removeResturaunt(resturauntId: String!): User
   }

@@ -119,13 +119,13 @@ export const ListFood = (props) => {
         return <h2>LOADING...</h2>
     }
     return (
-        <div>
+        <div className='container'>
             <h4><strong>Results for {props.food}:</strong></h4>
             <div className='col-12 row' style={{justifyContent:'center'}}> 
                 {props.data.businesses.map((item, index) => (
-                    <Card key={index}  className='card col-xl-3 col-md-5 col-sm-8 col-xs-12' style={{margin:'2%'}}>
+                    <Card key={index}  className='card col-xl-3 col-md-5 col-sm-8 col-xs-12' id='displayCards'>
                         <Card.Title>{item.name}</Card.Title>
-                        <Card.Img src={item.image_url} alt='food' style={{height:'30%'}} />
+                        <Card.Img id='displayImage' src={item.image_url} alt='food' style={{height:'30%'}} />
                         <Card.Body>
                             <p>Rating: {item.rating}</p>
                             <p>Price: {item.price}</p>

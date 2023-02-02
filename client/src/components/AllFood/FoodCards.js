@@ -1,44 +1,36 @@
-import React, {useState} from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap'
-import { OneSaved } from './OneSaved'
+import { authService } from '../../utils/auth';
 
-export default function FoodCards ({userData, handleDeleteFood}) {
-    // console.log(userData.savedFoods)
-
-    const [show, setShow] = useState({});
-    const handleClose = (id) => {
-        setShow((prevState) => ({ ...prevState, [id]: false }));
-    };
-    const handleShow = (id) => {
-        setShow((prevState) => ({ ...prevState, [id]: true }));
+export default function FoodCards ({userData, handleDeleteFoodItem}) {
+    const token = authService.loggedIn() ? authService.getToken() : null;
+    if(!token) {
+        return <h2>Please login first</h2>
     }
+    
+    const foodtypes = new Set(userData.savedFoods.map(savedFood => savedFood.foodtype));
+    const uniqueFoodtypes = Array.from(foodtypes);
+
     return (
         <div>
-            {userData && userData.savedFoods && userData.savedFoods.map((savedFood, index) => ( 
-                // <Card key={index} className='card col-xl-3 col-md-5 col-sm-8 col-xs-12' style={{margin:'2%'}}>
-                //     <Card.Title>{savedFood.name}</Card.Title>
-                //     <Card.Img src={savedFood.image_url} alt='' style={{height:'30%'}}/>
-                //     <Card.Body>
-                //         <Button onClick={() => handleShow(savedFood.foodId)}>More Info</Button>
-                //         <Button onClick={() => handleDeleteFood(savedFood.foodId)}>Delete</Button>
-                //         <OneSaved 
-                //             show={show}
-                //             onHide={() => handleClose(savedFood.foodId)}
-                //             onClick={() => handleClose(savedFood.foodId)}
-                //             handleClose={handleClose}
-                //             savedFood={savedFood}
-                //             handleDeleteFood={handleDeleteFood}
-                //         />
-                //     </Card.Body>
-                // </Card>
-                <Card key={index} className='card col-xl-3 col-md-5 col-sm-8 col-xs-12' style={{margin:'2%'}}>
-                    <Card.Title>{savedFood.foodtype}</Card.Title>
-                    <Card.Body>
-                        <Button onClick={() => handleShow(savedFood.foodId)}>More Info</Button>
-                        <Button onClick={() => handleDeleteFood(savedFood.foodId)}>Delete</Button>
+            {uniqueFoodtypes.map((foodtype, index) => {
+                const foodId = userData.savedFoods.find(savedFood => savedFood.foodtype === foodtype).foodId;
+                return (
+                    <Card id='allcards' key={index} className='card col-xl-3 col-md-5 col-sm-8 col-xs-12'>
+                    <Card.Title style={{textAlign:'center'}}>{foodtype}</Card.Title>
+                    <Card.Body id='cardbody'>
+                        <Button className='btns'
+                        as={Link} 
+                        to={{
+                            pathname:'/onefood',
+                            search: `?foodtype=${foodtype}`
+                        }}>Served At</Button>
+                        <Button className='btns' onClick={() => handleDeleteFoodItem(foodtype)}>Remove</Button>
                     </Card.Body>
                 </Card>
-                ))}
+                )
+            })}
         </div>
     )
 }

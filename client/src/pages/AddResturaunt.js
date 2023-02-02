@@ -3,6 +3,7 @@ import { ResturauntForm } from '../components/AddResturaunt/ResturauntForm'
 import { ListResturaunt } from '../components/AddResturaunt/ListResturaunt'
 import { searchResturaunt } from '../utils/API';
 import { authService } from '../utils/auth';
+import '../styles/add.css'
 
 export default function AddResturaunt() {
     const [data, setData] = useState({});

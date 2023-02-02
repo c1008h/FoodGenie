@@ -15,6 +15,7 @@ import { Signup } from './pages/Signup';
 import AddFood from './pages/AddFood'
 import AddResturaunt from './pages/AddResturaunt'
 import AllFood from './pages/AllFood'
+import OneFood from './pages/OneFood'
 import AllResturaunt from './pages/AllResturaunt';
 import Navbar from './components/Nav';
 import Footer from './components/Footer';
@@ -67,6 +68,10 @@ export default function App() {
                     <Route 
                         path='/allfoods' 
                         element={<AllFood/>}
+                    />
+                    <Route
+                        path='onefood'
+                        element={<OneFood/>}
                     />
                     <Route 
                         path='/allresturaunts' 

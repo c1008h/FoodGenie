@@ -24,11 +24,11 @@ export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveRe
                 {data.name}
             </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body >
                 <Carousel fade key={id.photos}>
                     {id?.photos?.map((photos) =>
-                        <Carousel.Item >
-                        <img src={photos} alt='' />
+                        <Carousel.Item>
+                        <img src={photos} className='reviewpics' alt='' />
                         </Carousel.Item>
                     )}
 
@@ -36,11 +36,12 @@ export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveRe
 
                 <div key={review.reviews}>
                     {review?.reviews?.map((reviews) =>
-                        <div>
+                        <div className='reviewBox'>
                             <div className='row'>
-                                <img src={reviews.user.image_url} 
-                                alt='user pic' 
-                                style={{height:'100px', width:'100px', borderRadius:'50%'}}/>
+                                <img 
+                                className='reviewerImage'
+                                src={reviews.user.image_url} 
+                                alt='user pic' />
                                 <div className='col-9'>
                                     <p >{reviews.text}</p>
                                     <Moment format="MM/DD/YYYY">{reviews.time_created}</Moment>

@@ -6,6 +6,7 @@ import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth'
 import { removeResturauntId } from '../utils/localStorage'
 import ResturauntCards from '../components/AllResturaunt/ResturauntCards'
+import '../styles/all.css'
 
 export default function AllResturaunt() {
     const [userData, setUserData] = useState({})
@@ -57,7 +58,7 @@ export default function AllResturaunt() {
     }
 
     return (
-        <Container>
+        <Container className='container'>
             <h4>
                 {userDataLength?
                     `Viewing ${userData.savedResturaunts ? data.me.savedResturaunts.length : 0} saved ${data.me.savedResturaunts && data.me.savedResturaunts.length === 1 ? 'resturaunt' : 'resturaunts'}`

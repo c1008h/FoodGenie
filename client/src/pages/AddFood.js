@@ -3,6 +3,7 @@ import { FoodForm } from '../components/AddFood/FoodForm'
 import { ListFood } from '../components/AddFood/ListFood'
 import { searchFood } from '../utils/API';
 import { authService } from '../utils/auth';
+import '../styles/add.css'
 
 export default function AddForm() {
     const [data, setData] = useState({});

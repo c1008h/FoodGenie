@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { authService } from '../utils/auth';
+import '../styles/index.css'
 
 function Navbar(props) {
     const logout = (event) => {
@@ -11,10 +12,10 @@ function Navbar(props) {
     }
 
     return (
-        <nav className='navbar navbar-expand-lg navbar-light' style={{backgroundColor:'#6666ff'}}>
-            <Link to='/' style={{color:'white', textDecoration:'none'}}>Food Genie</Link>
-            <DropdownButton id="dropdown-basic-button" style={{backgroundColor:'orange'}} title="More" >
-            {authService.loggedIn() ? (
+        <nav className='navbar navbar-expand-lg navbar-light'>
+            <Link to='/' id='title' className='col-6'><span id='title'>Food Genie</span></Link>
+            <DropdownButton id="dropdown-basic-button" className='col-3' title="More" >
+            {authService.loggedIn()?(
 
                 <>
                 <Dropdown.Item as={Link} to="/allfoods">All Foods</Dropdown.Item>

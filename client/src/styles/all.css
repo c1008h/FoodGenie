@@ -1,0 +1,19 @@
+.container {
+    margin-top: 5%;
+}
+
+/* Cards for viewing all */
+#allcards {
+    margin: 2%;
+    padding:2%;
+    justify-content: center;
+}
+
+#cardbody {
+    justify-content: center;
+    text-align: center;
+}
+
+.btns {
+    margin:2%
+}

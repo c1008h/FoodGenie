@@ -12,22 +12,26 @@ export const ResturauntForm = ({onSubmit}) => {
     };
 
     return(
-        <div>
-            <form onSubmit={handleSubmit} style={{margin:'1%'}}>
-                <label style={{justifyContent:'center'}}>Resturaunt:
+        <div className='form-container'>
+            <form onSubmit={handleSubmit}>
+                <div className='inputforms'>
+                    <label style={{justifyContent:'center'}}>Resturaunt:                </label>
                     <input 
                         className="form-control" 
                         type="text" name="food" 
                         value={userResturaunt} 
                         onChange={e => setUserResturaunt(e.target.value)} />
-                </label>
-                <label>Location:
+
+                </div>
+                <div className='inputforms'> 
+                    <label>Location:</label>
                     <input className='form-control' type='text' 
                         name='location' 
                         value={userLocation} 
                         onChange={e => setUserLocation(e.target.value)} />
-                </label>
-                <input type="submit" value="Submit" />
+                </div>                
+                    
+                <input className='inputBtn' type="submit" value="Search" />
             </form>
         </div>
     )

@@ -28,7 +28,7 @@ const resolvers = {
       login: async (parent, { email, password }) => {
         const user = await User.findOne({ email });
         if (!user) {
-          throw new AuthenticationError('No user found with this email address');
+          throw new AuthenticationError('Wrong email/password!');
         }
 
         const correctPw = await user.isCorrectPassword(password);
@@ -59,6 +59,19 @@ const resolvers = {
           const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
             { $pull: { savedFoods: { foodId : foodId }} },
+            { new: true }
+          )
+          console.log('successfully removed the food')
+          return updatedUser;
+        }
+        throw new AuthenticationError ('You need to be logged in.');
+      },
+      removeFoodItem: async (parent, {foodtype} , context) => {
+        if (context.user) {
+          
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $pull: { savedFoods: { foodtype : foodtype }} },
             { new: true }
           )
           console.log('successfully removed the food')

@@ -1,0 +1,41 @@
+/* These are for add food/resturaunt */
+/* .form-container {
+    /* padding: %; */
+
+.inputforms {
+    margin: 2%;
+}
+
+.inputBtn {
+    background-color: #6666ff;
+    border-radius: 15%;
+    color: white;
+}
+
+.container {
+    margin-top: 2%;
+}
+/* Searched item cards */
+#displayCards {
+    margin:2%;
+    padding:3%;
+    height: 20%;
+}
+
+#displayImage {
+    height:500px;
+}
+
+/* Popouts */
+.reviewBox {
+    border:black solid;
+    margin: 1%;
+    padding: 2%;
+    border-radius: 25px;
+}
+
+.reviewerImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 25px;
+}
