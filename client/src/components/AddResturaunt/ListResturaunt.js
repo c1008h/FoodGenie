@@ -25,7 +25,6 @@ export const ListResturaunt = (props) => {
 
     const [saveResturaunt] = useMutation(SAVE_RESTURAUNT, {
         update(cache, { data: { saveResturaunt }}) {
-            // const { me } = cache.readQuery({ query: QUERY_ME });
             const data = cache.readQuery({ query: QUERY_ME });
             const me = data ? data.me : null;
             if (!me) {
@@ -41,7 +40,6 @@ export const ListResturaunt = (props) => {
 
     const handleSaveResturaunt = async (id, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
         setId(id)
-        // const foodToSave = searchedFoods.find((food) => food.foodId === foodId)
         const token = authService.loggedIn() ? authService.getToken() : null;
         if(!token) {
             return false
@@ -65,10 +63,6 @@ export const ListResturaunt = (props) => {
         } catch (error) {
             console.error(error)
         }
-        // setUserData({
-        //     ...userData,
-        //     savedResturaunts: [...userData.savedResturaunts, id],
-        // });
     }
     const handleClose = (id) => {
         setShow((prevState) => ({ ...prevState, [id]: false }));
@@ -85,7 +79,6 @@ export const ListResturaunt = (props) => {
         setReviews(review)
     }
     const handleDeleteFood = async (resturauntId) => {
-        // console.log(foodId)
         const token = authService.loggedIn() ? authService.getToken() : null
         if (!token) {
             return false
@@ -102,10 +95,6 @@ export const ListResturaunt = (props) => {
         } catch (error) {
             console.error(error)
         }
-        // setUserData({
-        //     ...userData,
-        //     savedResturaunts: userData.savedResturaunts.filter((resturauntId) => resturauntId !== id),
-        // });
     }
     const token = authService.loggedIn() ? authService.getToken() : null;
     if(!token) {

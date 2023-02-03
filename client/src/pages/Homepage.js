@@ -22,8 +22,6 @@ export default function Homepage() {
             setSavedResturants(userData.savedResturaunts)
         }
     }, [data, userData])
-    console.log(userSavedFoods)   
-    console.log(userSavedResturants) 
 
     const handleFoodClick = () => {
         setIsFood(!isFood);

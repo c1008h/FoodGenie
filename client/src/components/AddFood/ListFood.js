@@ -24,21 +24,20 @@ export const ListFood = (props) => {
             setLoading(false)
         }
     }, [data])
-    // console.log(props.food)
 
-    const renderButton = (userData, index) => {
-        const item = userData.find(item => item.id === index)
-        if(item) {
-            return <Button type="button" 
-            className="btn btn-secondary m-1"
-            onClick={() => handleDeleteFood(item.id)}>Remove</Button>
-        } else {
-            return <Button type="button" 
-            className="btn btn-secondary m-1"
-            onClick={() => 
-            handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>Save</Button>
-        }
-    }
+    // const renderButton = (userData, index) => {
+    //     const item = userData.find(item => item.id === index)
+    //     if(item) {
+    //         return <Button type="button" 
+    //         className="btn btn-secondary m-1"
+    //         onClick={() => handleDeleteFood(item.id)}>Remove</Button>
+    //     } else {
+    //         return <Button type="button" 
+    //         className="btn btn-secondary m-1"
+    //         onClick={() => 
+    //         handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>Save</Button>
+    //     }
+    // }
     const [saveFood] = useMutation(SAVE_FOOD, {
         update(cache, { data: { saveFood }}) {
             const data = cache.readQuery({ query: QUERY_ME });
@@ -54,12 +53,10 @@ export const ListFood = (props) => {
         }
     })
     const handleSaveFood = async (id, foodtype, name, image_url, is_closed, url, rating, price, display_phone, distance) => {
-        // console.log(props.food.trim())
         const token = authService.loggedIn() ? authService.getToken() : null;
         if(!token) {
             return false
         }
-        // console.log(id)
         try {
             await saveFood({ variables: { input: {
                 foodId: id,
@@ -87,8 +84,7 @@ export const ListFood = (props) => {
         // Searching foodId and reviews from API
         const response = await foodById(id)
         const review = await foodReview(id)
-        // console.log(response)
-        // console.log(review)
+
         setId(response)
         setReviews(review)
 

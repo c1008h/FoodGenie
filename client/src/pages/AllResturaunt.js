@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client'
 import { REMOVE_RESTURAUNT } from '../utils/mutations'
 import { QUERY_ME } from '../utils/queries'
 import { authService } from '../utils/auth'
-import { removeResturauntId } from '../utils/localStorage'
 import ResturauntCards from '../components/AllResturaunt/ResturauntCards'
 import '../styles/all.css'
 
@@ -21,8 +20,6 @@ export default function AllResturaunt() {
         }
     }, [data])
     
-    console.log(userData)
-
     const userDataLength = data && data.me ? Object.keys(data.me).length : 0;
 
     const handleDeleteResturaunt = async (resturauntId) => {
@@ -40,7 +37,6 @@ export default function AllResturaunt() {
                 throw new Error('Something went wrong.')
             }
             setUserData(updatedData.data.removeResturaunt)
-            removeResturauntId(userData)
         } catch (error) {
             console.error(error)
         }

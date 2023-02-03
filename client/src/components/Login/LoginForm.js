@@ -5,9 +5,6 @@ export const LoginForm = ({handleFormSubmit, handleSubmit, formState}) => {
 
     return (
         <Form onSubmit={handleFormSubmit} style={{padding:'15%', justifyContent:'center'}}>
-        {/* <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-        Something went wrong with your login credentials!
-        </Alert> */}
             <Form.Group>
                 <Form.Label htmlFor='email'>Email</Form.Label>
                 <Form.Control

@@ -5,10 +5,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import Moment from 'react-moment';
 
 export const OneResturaunt = ({data, show, handleClose, id, review, handleSaveResturaunt, savedResturauntIds, handleDeleteFood}) => {
-    // console.log(data)
-    // console.log(id)
-    // console.log(review.reviews);
-  
     return (
         <Modal
             {...data}

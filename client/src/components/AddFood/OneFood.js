@@ -1,13 +1,8 @@
 import React from 'react'
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
-import Carousel from 'react-bootstrap/Carousel';
+import { Modal, Button, Carousel } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 export const OneFood = ({data, show, handleClose, handleSaveFood, id, review, savedFoodIds}) => {
-    // console.log(data)
-    // console.log(id)
-    // console.log(review.reviews);
   
     return (
         <Modal
