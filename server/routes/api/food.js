@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios');
 require('dotenv').config({path: __dirname+'../../../env'});
-const BANANA = process.env.BEARER_TOKEN
+const BANANA = process.env.BEARER_TOKEN || BEARER_TOKEN
 
 router.post("/", (req, res) => {
     const { userFood, userLocation } = req.body;
