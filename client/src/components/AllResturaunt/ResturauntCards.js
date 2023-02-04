@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Card, Button } from 'react-bootstrap'
-import { OneSaved } from '../AllResturaunt/OneSaved'
+import { OneSaved } from './OneSaved'
 import { authService } from '../../utils/auth';
 
 export default function ResturauntCards ({userData, handleDeleteResturaunt}) {
