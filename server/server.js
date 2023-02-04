@@ -24,7 +24,8 @@ const server = new ApolloServer({
 app.use(
   '/graphql',
   cors({ 
-  origin: ['https://foodgenie-ch.herokuapp.com/', 'https://foodgenie-ch.herokuapp.com/graphql'] 
+  origin: ['https://foodgenie-ch.herokuapp.com', 'https://studio.apollographql.com'],
+  credentials: true, 
   })
 )
 
