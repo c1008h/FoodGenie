@@ -6,8 +6,9 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       // 👇️ make sure to update your target
-      target: 'http://localhost:3006',
-      // changeOrigin: true,
+      // target: 'http://localhost:3006',
+      target: 'https://foodgenie-ch.herokuapp.com/',
+      changeOrigin: true,
     }),
   )}
   catch(err) {
