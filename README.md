@@ -11,7 +11,7 @@ Introducing the Food Genie, the perfect solution for indecisive foodies! Save al
 - <a href='https://www.mongodb.com/'>MongoDB</a>
 - <a href='https://expressjs.com/'>Express</a>
 - <a href='https://graphql.org/learn/'>Graphql</a>
-- <a href='https://www.yelp.com/developers'>REST API</a>
+- <a href='https://www.yelp.com/developers'>API</a>
 
 
 
