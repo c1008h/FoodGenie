@@ -7,7 +7,7 @@ module.exports = function (app) {
     createProxyMiddleware({
       // 👇️ make sure to update your target
       target: 'http://localhost:3006' || 
-      'https://foodgenie-ch.herokuapp.com/graphql',
+      'https://foodgenie-ch.herokuapp.com',
       // changeOrigin: true,
     }),
   )}

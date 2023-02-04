@@ -2,7 +2,7 @@
 <img src='./images/FoodGenie.gif'>
 
 ## Description
-The solution to the daily food dilemma. Search and save your favorite resturaunts and foods. Save time and let the app decide your next meal!
+Introducing the Food Genie, the perfect solution for indecisive foodies! Save all your favorite foods and restaurants in one place, and let the Genie take care of the rest. With a simple tap, the Genie randomly selects an item from your saved list, saving you time and reducing the stress of deciding where to eat. No more endless scrolling or debating with friends, let the Food Genie help you discover new and exciting dining experiences. 
 
 ### Created with:
 - <a href='https://javascript.info/'>JavaScript</a>
@@ -29,6 +29,7 @@ The solution to the daily food dilemma. Search and save your favorite resturaunt
   - [Contact](#contact)
 
 ## Instructions
+<a href='https://foodgenie-ch.herokuapp.com/'>Click here to use!</a>
 
 ### Installation
 Use this command line to clone this repo before running the program:
