@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors')
 // require('dotenv').config({path: __dirname+'/../.env'});
+// const corsOptions = {
+//   origin: 'https://foodgenie-ch.herokuapp.com',
+//   credentials: true
+// }
 
 // Importing ApolloServer
 const { ApolloServer } = require('apollo-server-express');
@@ -39,7 +43,7 @@ app.use('/api/resturaunt', require('./routes/api/resturaunt'))
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start(); 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: {credentials: true, origin: true} });
   
   db.once('open', () => {
     app.listen(PORT, () => {

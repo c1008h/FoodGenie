@@ -8,7 +8,7 @@ module.exports = function (app) {
       // 👇️ make sure to update your target
       // target: 'http://localhost:3006',
       target: 'https://foodgenie-ch.herokuapp.com',
-      changeOrigin: true,
+      // changeOrigin: true,
     }),
   )}
   catch(err) {
