@@ -18,9 +18,6 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-  introspection: true,
-  playground: true,
-  httpEndpoint:'https://foodgenie-ch.herokuapp.com/graphql'
 });
 
 app.use(cors())
