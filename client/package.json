@@ -50,5 +50,6 @@
       "last 1 safari version"
     ]
   },
-  "main": "index.js"
+  "main": "index.js",
+  "proxy":"http://localhost:3006"
 }
