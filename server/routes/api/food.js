@@ -3,12 +3,14 @@ const router = express.Router()
 const axios = require('axios');
 require('dotenv').config({path: __dirname+'../../../env'});
 const BANANA = process.env.BEARER_TOKEN || BEARER_TOKEN
+// const cancelToken = axios.cancelToken.source();
 
 router.post("/", (req, res) => {
     const { userFood, userLocation } = req.body;
     // console.log(userFood)
     axios
     .get('https://api.yelp.com/v3/businesses/search', {
+      // cancelToken.cancelToken.token,
       headers: {
         'Authorization': `Bearer ${BANANA}`
       },
@@ -24,6 +26,9 @@ router.post("/", (req, res) => {
   
     })
     .catch((error) => {
+      // if(axios.isCancel(err)){
+      //   console.log('cancelled')
+      // } else {
       console.log(error)
     })
 });

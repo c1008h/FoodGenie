@@ -1,9 +1,30 @@
 import React from 'react'
 import { Modal, Button, Carousel } from 'react-bootstrap';
 import Moment from 'react-moment';
+// import { foodById, foodReview } from '../../utils/API';
 
-export const OneFood = ({data, show, handleClose, handleSaveFood, id, review, savedFoodIds}) => {
-  
+export const OneFood = ({ data, show, id, review, handleClose, handleSaveFood, savedFoodIds}) => {
+    // const [id, setId ] = useState({});
+    // const [reviews, setReviews] = useState({})
+   
+    // useEffect(() => {
+    //     let isCancel = false;
+    //     const handleShow = async (id) => {
+    //         // Searching foodId and reviews from API
+    //         const responseId = await foodById(id)
+    //         const responseReview = await foodReview(id)
+    //         setId(responseId)
+    //         setReviews(responseReview)
+    //         if (!isCancel) {
+    //             console.log('item is changed')
+    //         }
+    //     }
+
+    //     handleShow()
+
+    //     return () => { isCancel = true}
+    // },[show])
+
     return (
         <Modal
             {...data}
@@ -20,7 +41,7 @@ export const OneFood = ({data, show, handleClose, handleSaveFood, id, review, sa
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Carousel fade key={id.photos}>
+                <Carousel fade key={data.photos}>
                     {id?.photos?.map((photos) =>
                         <Carousel.Item >
                         <img src={photos} alt='' className='reviewpics'/>
@@ -52,9 +73,9 @@ export const OneFood = ({data, show, handleClose, handleSaveFood, id, review, sa
                 </div>
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={() => handleClose(data.id)}>Close</Button>
-            <Button onClick={() => handleSaveFood(data.id, data.name, data.image_url, data.is_closed, data.url, data.rating, data.price, data.display_phone)}>
-                {savedFoodIds?.some((savedFoodId) => savedFoodId === data.id) ?
+            <Button onClick={() => handleClose(id.id)}>Close</Button>
+            <Button onClick={() => handleSaveFood(id.id, id.name, id.image_url, id.is_closed, id.url, id.rating, id.price, id.display_phone)}>
+                {savedFoodIds?.some((savedFoodId) => savedFoodId === id.id) ?
                 'This food has already been saved!':
                 'Save'}
                 </Button>

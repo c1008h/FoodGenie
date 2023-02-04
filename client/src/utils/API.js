@@ -1,5 +1,6 @@
 import axios from 'axios';
 axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
+// const cancelToken = axios.cancelToken.source()
 
 // Search by food
 export const searchFood = (userFood, userLocation) => {

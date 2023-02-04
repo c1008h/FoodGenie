@@ -16,10 +16,16 @@ export default function Homepage() {
     const { data } = useQuery(QUERY_ME)
 
     useEffect(() => {
+        let fetchData = false
         if (data) {
-            setUserData(data.me)
-            setSavedFoods(userData.savedFoods)
-            setSavedResturants(userData.savedResturaunts)
+            if (!fetchData) {
+                setUserData(data.me)
+                setSavedFoods(userData.savedFoods)
+                setSavedResturants(userData.savedResturaunts)
+            }
+            return () => {
+                fetchData = true
+            }
         }
     }, [data, userData])
 

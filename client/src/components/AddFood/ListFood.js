@@ -14,30 +14,30 @@ export const ListFood = (props) => {
     const [userData, setUserData] = useState({})
     const [loading, setLoading] = useState(true)
     const [removeFood] = useMutation(REMOVE_FOOD);
-
+    console.log(props)
     const { data } = useQuery(QUERY_ME)
 
     useEffect(() => {
         if (data) {
-            console.log(data.me)
             setUserData(data.me.savedFoods)
             setLoading(false)
         }
-    }, [data])
-
-    // const renderButton = (userData, index) => {
-    //     const item = userData.find(item => item.id === index)
-    //     if(item) {
-    //         return <Button type="button" 
-    //         className="btn btn-secondary m-1"
-    //         onClick={() => handleDeleteFood(item.id)}>Remove</Button>
-    //     } else {
-    //         return <Button type="button" 
-    //         className="btn btn-secondary m-1"
-    //         onClick={() => 
-    //         handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>Save</Button>
-    //     }
-    // }
+    },[data])
+    
+    console.log(props)
+    const renderButton = (index) => {
+        const item = userData.find(item => item.id === index)
+        if(item) {
+            return <Button type="button" 
+            className="btn btn-secondary m-1"
+            onClick={() => handleDeleteFood(item.id)}>Remove</Button>
+        } else {
+            return <Button type="button" 
+            className="btn btn-secondary m-1"
+            onClick={() => 
+            handleSaveFood(item.id, item.foodtype, item.name, item.image_url, item.is_closed, item.url, item.rating, item.price, item.display_phone)}>Save</Button>
+        }
+    }
     const [saveFood] = useMutation(SAVE_FOOD, {
         update(cache, { data: { saveFood }}) {
             const data = cache.readQuery({ query: QUERY_ME });
@@ -84,9 +84,9 @@ export const ListFood = (props) => {
         // Searching foodId and reviews from API
         const response = await foodById(id)
         const review = await foodReview(id)
-
         setId(response)
         setReviews(review)
+        console.log(id)
 
     }
     const handleDeleteFood = async (foodId) => {

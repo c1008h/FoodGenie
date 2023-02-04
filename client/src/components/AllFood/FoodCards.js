@@ -8,7 +8,7 @@ export default function FoodCards ({userData, handleDeleteFoodItem}) {
     if(!token) {
         return <h2>Please login first</h2>
     }
-    console.log(userData.savedFoods)
+    // console.log(userData.savedFoods)
     const foodtypes = new Set(userData.savedFoods.map(savedFood => savedFood.foodtype));
     const uniqueFoodtypes = Array.from(foodtypes);
 

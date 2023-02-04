@@ -22,14 +22,14 @@ export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose})
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Carousel fade key={savedResturaunt.photos}>
+                {/* <Carousel fade key={savedResturaunt.photos}>
                     {savedResturaunt?.photos?.map((photos) =>
                         <Carousel.Item >
                         <img src={photos} alt='' />
                         </Carousel.Item>
                     )}
 
-                </Carousel> 
+                </Carousel>  */}
 
                 {/* <div key={review.reviews}>
                     {review?.reviews?.map((reviews) =>
