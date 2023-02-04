@@ -23,7 +23,7 @@ import Error from './pages/Error'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-    uri: '/graphql'
+    uri: 'http://localhost:3006/graphql'
     // uri:'/graphql'
 });
 
