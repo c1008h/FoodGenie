@@ -6,7 +6,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const cors = require('cors')
-// require('dotenv').config();
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3006;
 const app = express();
