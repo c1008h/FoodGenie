@@ -13,10 +13,8 @@
   "keywords": [],
   "author": "Chris H",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^7.6.0"
-  },
   "dependencies": {
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "concurrently": "^7.6.0"
   }
 }
