@@ -10,10 +10,6 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "engines": {
-    "npm": "8.3.0",
-    "node": "18"
-  },
   "keywords": [],
   "author": "Chris H",
   "license": "ISC",
