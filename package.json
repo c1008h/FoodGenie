@@ -4,10 +4,11 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "cd server && npm start",
-    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start": "node server/server.js --ignore client",
+    "start-client": "cd client && npm i && npm run start",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
@@ -17,10 +18,7 @@
   "keywords": [],
   "author": "Chris H",
   "license": "ISC",
-  "dependencies": {
-    "concurrently": "^7.6.0",
-    "dotenv": "^16.0.3",
-    "if-env": "^1.0.4",
-    "nodemon": "^2.0.20"
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   }
 }

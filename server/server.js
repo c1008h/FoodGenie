@@ -1,39 +1,29 @@
 const express = require('express');
-const path = require('path');
-const cors = require('cors')
-// require('dotenv').config({path: __dirname+'/../.env'});
-
-// Importing ApolloServer
 const { ApolloServer } = require('apollo-server-express');
-
 const { authMiddleware } = require('./utils/auth');
+const path = require('path');
+const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const { typeDefs, resolvers } = require('./schemas');
+const cors = require('cors')
+// require('dotenv').config();
 
 const PORT = process.env.PORT || 3006;
 const app = express();
+
+app.use(cors())
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-
 });
 
-app.use(
-  '/graphql',
-  cors({ 
-  origin: ['https://foodgenie-ch.herokuapp.com', 'https://studio.apollographql.com'],
-  credentials: true, 
-  })
-)
-
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, './client/build')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
 app.get('/', (req, res) => {
