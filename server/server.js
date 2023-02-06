@@ -14,10 +14,10 @@ const app = express();
 app.use(cors())
 
 const server = new ApolloServer({
-  cache: "bounded",
   typeDefs,
   resolvers,
   context: authMiddleware,
+  cache: "bounded",
 });
 
 app.use(express.urlencoded({ extended: false }));
