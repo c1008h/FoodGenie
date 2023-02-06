@@ -14,7 +14,7 @@ const app = express();
 app.use(cors())
 
 const server = new ApolloServer({
-  cache: new InMemoryLRUCache(),
+  cache: "bounded",
   typeDefs,
   resolvers,
   context: authMiddleware,
