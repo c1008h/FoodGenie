@@ -24,7 +24,7 @@ import Error from './pages/Error'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3006/graphql' || '/graphql' || 'https://foodgenie-ch.herokuapp.com/graphql' || 'https://main--frabjous-wisp-5d28b3.netlify.app/graphql'
+    uri: '/graphql' 
 });
 
 // // Construct request middleware that will attach the JWT token to every request as an `authorization` header
