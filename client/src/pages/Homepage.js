@@ -33,7 +33,6 @@ export default function Homepage() {
         setIsFood(!isFood);
         setIsRestaurant(false);
     };
-    
     const handleRestaurantClick = () => {
         setIsRestaurant(!isRestaurant);
         setIsFood(false);
