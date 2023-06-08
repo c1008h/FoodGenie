@@ -14,6 +14,7 @@ export default function OneFood() {
     
     const [userData, setUserData] = useState({})
     const [loading, setLoading] = useState(true)
+    // eslint-disable-next-line 
     const [removeFood, { error }] = useMutation(REMOVE_FOOD);
     const { data } = useQuery(QUERY_ME)
     useEffect(() => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
-import Carousel from 'react-bootstrap/Carousel';
-import Moment from 'react-moment';
+// import Carousel from 'react-bootstrap/Carousel';
+// import Moment from 'react-moment';
 
 export const OneSaved = ({savedResturaunt, show, handleDeleteFood, handleClose}) => {
   

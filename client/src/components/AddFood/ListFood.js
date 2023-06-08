@@ -25,6 +25,7 @@ export const ListFood = (props) => {
     },[data])
     
     console.log(props)
+    // eslint-disable-next-line 
     const renderButton = (index) => {
         const item = userData.find(item => item.id === index)
         if(item) {
