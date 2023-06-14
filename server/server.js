@@ -18,6 +18,8 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
   cache: "bounded",
+  introspection: true,
+  playground: true,
 });
 
 app.use(express.urlencoded({ extended: false }));
