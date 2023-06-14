@@ -8,7 +8,7 @@ mongoose.connect(process.env.MONGODB_URI || MONGODB_URI || 'mongodb://localhost:
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // useCreateIndex: true,
-  // useFindAndModify: true,
+  // useFindAndModify: true
 }) 
 
 module.exports = mongoose.connection; 
