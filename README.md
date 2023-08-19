@@ -29,7 +29,7 @@ Introducing the Food Genie, the perfect solution for indecisive foodies! Save al
   - [Contact](#contact)
 
 ## Instructions
-<a href='https://main--frabjous-wisp-5d28b3.netlify.app/'>Click here to use!</a>
+<a href='https://thefoodgenie.netlify.app/'>Click here to use!</a>
 
 ### Installation
 Use this command line to clone this repo before running the program:
