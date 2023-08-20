@@ -7,7 +7,7 @@ export default function NotLoggedIn() {
 
     return (
         <Container fluid='true' style={{justifyContent:'center', textAlign:'center', marginTop:'2%', padding:'5%'}}>
-            <Row className='section'>
+            <Row className='section' style={{padding:'10%'}}>
                 <Col>
                     <h2>Stop Wasting Time Deciding What to Eat</h2>
                     <p>Food Genie helps you discover your next culinary adventure quickly and effortlessly.</p>
