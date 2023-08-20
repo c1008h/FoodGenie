@@ -18,3 +18,8 @@
     margin-bottom: 5%;
     padding:2%;
 }
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
