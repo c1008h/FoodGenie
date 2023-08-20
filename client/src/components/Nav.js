@@ -13,8 +13,8 @@ function Navbar(props) {
 
     return (
         <nav className='navbar navbar-expand-lg navbar-light'>
-            <Link to='/' id='title' className='col-6'><span id='title'>Food Genie</span></Link>
-            <DropdownButton id="dropdown-basic-button" className='col-3' title="More" >
+            <Link to='/' id='title' className='col-6'><img src="/logo/genie-lamp-48.svg" alt="Genie Lamp Logo"/><span id='title'>Food Genie</span></Link>
+            <DropdownButton id="dropdown-basic-button" className='col-3' title="More">
             {authService.loggedIn()?(
 
                 <>

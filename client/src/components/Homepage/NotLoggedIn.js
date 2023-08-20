@@ -96,7 +96,7 @@ export default function NotLoggedIn() {
                             <p>We are passionate about food and simplifying your dining decisions. Our mission is to help you discover amazing dining experiences effortlessly.</p>
                         </Col>
                         <Col xs={12} md={6}>
-                            <img src="team-photo.jpg" alt="Our Team" className="team-photo" />
+                            <img src="/images/tofu.png" alt="Our Team" className="team-photo" style={{height:'200px', width:'200px'}}/>
                         </Col>
                     </Row>
                 </Container>
