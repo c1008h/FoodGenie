@@ -13,3 +13,8 @@
     background-color: var(--goldentexthover);
     color:#FFFFFF;
 }
+
+.section {
+    margin-bottom: 5%;
+    padding:2%;
+}
