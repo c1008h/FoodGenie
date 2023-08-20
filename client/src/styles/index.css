@@ -1,5 +1,11 @@
 :root {
-    --purple:#6666ff;
+    /* --purple:#6666ff; */
+    --genieblue:#2A287D;
+    /* navbar and footer text */
+    --goldentext:#FFD700;
+    --goldentexthover:#6A0DAD;
+    /* footer links */
+    --teal:#008080;
 }
 
 /* Navbar styles */
@@ -12,13 +18,14 @@
 
 .navbar {
     height: 20%;
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
+    background-color: var(--genieblue);
 }
 
 /* Footer */
 .footer {
     position: fixed;
-    background-color: var(--purple);
+    background-color: var(--genieblue);
     background-size: cover;
     padding: 5% 0;
     bottom: 0;
