@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Container, Card, Row, Col, Button } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
+import '../../styles/landing.css'
 
 export default function NotLoggedIn() {
 
@@ -10,7 +11,7 @@ export default function NotLoggedIn() {
                 <Col>
                     <h2>Stop Wasting Time Deciding What to Eat</h2>
                     <p>Food Genie helps you discover your next culinary adventure quickly and effortlessly.</p>
-                    <Link to='/signup'><Button>Get Started</Button></Link>
+                    <Link to='/signup'><button className='call-to-action-btn'>Get Started</button></Link>
                 </Col>
             </Row>
             <Row>

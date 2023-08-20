@@ -1,0 +1,15 @@
+.call-to-action-btn {
+    background-color: var(--callToActionBtn);
+    color: var(--secondarybtns);
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor:pointer;
+}
+
+.call-to-action-btn:hover {
+    background-color: var(--goldentexthover);
+    color:#FFFFFF;
+}

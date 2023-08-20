@@ -4,8 +4,11 @@
     /* navbar and footer text */
     --goldentext:#FFD700;
     --goldentexthover:#6A0DAD;
-    /* footer links */
-    --teal:#008080;
+    --teal:#008080; /* footer links */
+    --callToActionBtn:#FFD700;
+    --secondarybtns:#2A287D;
+    --hoveractivebtn:#6A0DAD;
+    --disabledbtn:#E0E0E0;
 }
 
 /* Navbar styles */
