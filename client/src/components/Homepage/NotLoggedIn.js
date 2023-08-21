@@ -29,7 +29,8 @@ export default function NotLoggedIn() {
                         </Card>
                     </Col>
                     <Col xs={12} md={6} lg={3}>
-                        <Card>
+                        <Card style={{alignItems:'center'}}>
+                            <img src='./icons/stars/star-48.png' id='star'/>
                             <h3>Favorites</h3>
                             <p>Save and organize your go-to restaurants and must-try meals effortlessly.</p>
                         </Card>

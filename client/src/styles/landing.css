@@ -23,3 +23,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+#star {
+    height: 100px;
+    width:100px;
+}
+
