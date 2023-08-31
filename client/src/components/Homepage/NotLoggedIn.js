@@ -17,13 +17,18 @@ export default function NotLoggedIn() {
             <Row className='section'>
                 <Container className='flex-container'>
                     <Col xs={12} md={6} lg={3}>
-                        <Card>
+                        <Card style={{alignItems:'center'}}>
+                        <img src='./icons/stars/star-48.png' id='star'/>
+
                             <h3>Restaurant Search</h3>
                             <p>Explore a world of dining options with our easy-to-use restaurant search.</p>
                         </Card>
                     </Col>
                     <Col xs={12} md={6} lg={3}>
-                        <Card>
+                        <Card style={{alignItems:'center'}}>
+                            {/* <img src='./icons/magnifying.png' id='magnifying'/> */}
+                            <img src='./icons/stars/star-48.png' id='star'/>
+
                             <h3>Food Search</h3>
                             <p>Craving something specific? Find restaurants serving your favorite dishes.</p>
                         </Card>
@@ -36,7 +41,9 @@ export default function NotLoggedIn() {
                         </Card>
                     </Col>
                     <Col xs={12} md={6} lg={3}>
-                        <Card>
+                        <Card style={{alignItems:'center'}}>
+                        <img src='./icons/stars/star-48.png' id='star'/>
+
                             <h3>Randomizer</h3>
                             <p>Can't decide? Let Food Genie choose for you and embark on a spontaneous food adventure!</p>
                         </Card>
